@@ -1,0 +1,350 @@
+/* ESTILOS E REFERENCIAS PARA ICONES DO TELESTRATOR */
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?ozzebp');
+  src:  url('fonts/icomoon.eot?ozzebp#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?ozzebp') format('truetype'),
+    url('fonts/icomoon.woff?ozzebp') format('woff'),
+    url('fonts/icomoon.svg?ozzebp#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-amarelo:before {
+  content: "\e900";
+  color: #ff0;
+}
+.icon-azul:before {
+  content: "\e901";
+  color: #00f;
+}
+.icon-branco:before {
+  content: "\e902";
+  color: #fff;
+}
+.icon-ciano:before {
+  content: "\e903";
+  color: #0ff;
+}
+.icon-cinza:before {
+  content: "\e904";
+  color: #7f7f7f;
+}
+.icon-continuo:before {
+  content: "\e905";
+}
+.icon-espessura:before {
+  content: "\e906";
+}
+.icon-espessura2:before {
+  content: "\e907";
+}
+.icon-finissimo:before {
+  content: "\e908";
+}
+.icon-fino:before {
+  content: "\e909";
+}
+.icon-grosso:before {
+  content: "\e90a";
+}
+.icon-laranja:before {
+  content: "\e90b";
+  color: #ff7f00;
+}
+.icon-lixeira:before {
+  content: "\e90c";
+}
+.icon-magenta:before {
+  content: "\e90d";
+  color: #f0f;
+}
+.icon-maolivre:before {
+  content: "\e90e";
+}
+.icon-medio:before {
+  content: "\e90f";
+}
+.icon-pontilhado:before {
+  content: "\e910";
+}
+.icon-preto:before {
+  content: "\e911";
+}
+.icon-tracejado:before {
+  content: "\e912";
+}
+.icon-tracoponto:before {
+  content: "\e913";
+}
+.icon-verde:before {
+  content: "\e914";
+  color: #5fbf00;
+}
+.icon-vermelho:before {
+  content: "\e915";
+  color: #f00;
+}
+
+/*----------FIM ICONES------------*/
+
+.thumbvideo {
+    width: 60px;
+    height: 50px;
+}
+
+.videoTelaLargura{
+    width: auto;
+    height: 50%;
+}
+
+.videoTelaAltura{
+    width: 90%; 
+    height: auto;
+}
+
+
+.videoPainel{
+    width: 100%;
+    height: auto;
+    margin: 0 20 0 20;
+}
+
+.MidtamanhoPagina{
+   width: 75%; 
+   margin-left: auto;
+   margin-right: auto;  
+}
+
+.centroid{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 25%;
+    
+}
+
+.direito{
+    position: absolute;
+    right: auto;
+}
+
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  
+  .card {
+    display: inline-block;
+  }
+}
+
+.scrolling-wrapper {
+  -webkit-overflow-scrolling: touch;
+}
+
+
+.BarraTop{
+    background-color: lightgray;
+    overflow: hidden;
+}
+
+.flutante{
+    z-index: 1;
+    position: absolute;    
+}
+
+.footer{
+	background-color: #E6E6E6;
+	
+}
+
+.top-bar{
+	padding: 5px;
+}
+
+.callout{
+	margin: 0 0 5px 0;
+}
+
+textarea{
+	resize: none;
+}
+
+table{
+	text-align: center;
+}
+
+#idcanvas{
+    position: absolute;
+    border: 1px solid #000;
+}
+
+.cvbutton{
+    cursor:pointer;
+    margin: 4px 2px;
+}
+
+#divcanvas{
+    display:none;
+}
+
+#divToolbarTelestrator{
+    display:none;    
+}
+
+label {
+    color: white;
+    font-weight: bold;
+}
+
+table > thead > tr > th {
+	text-align: center;
+}
+
+
+@media only screen and (min-height: 720px){
+	.textAreaDesktop{
+		height: 85%;
+	}
+	
+}
+
+@media only screen and (max-height: 610px){
+	.textAreaDesktop{
+		height: 85%;
+	}
+	
+	.videoTelaAltura{
+		width: 53%;
+		height: auto;
+	}
+	
+	.MidtamanhoPagina{
+	   width: 53%;
+	   margin-left: auto;
+	   margin-right: auto; 
+	
+	}
+	
+}
+
+@media only screen and (max-height: 732px) and (min-height: 610px){
+	.textAreaDesktop{
+		height: 85%; /*16em; /*9em*/
+}
+
+	.videoTelaAltura{
+		width: 69%; /*53%*/
+		height: auto;
+	}
+
+	.MidtamanhoPagina{
+	   width: 69%;
+	   margin-left: auto;
+	   margin-right: auto; 
+
+	}
+	
+}
+
+@media only screen and (max-width: 720px) { /* 768 */
+	.videoTelaAltura{
+		width: 100%;
+		height: auto;
+	}
+	
+	.MidtamanhoPagina{
+	   width: 100%;
+	   margin-left: auto;
+	   margin-right: auto; 
+	
+}
+
+	.esconder {
+    	display: none; 
+	}
+	
+}
+
+@media only screen and (min-width: 768px){
+	.tamanhoDiv{
+		width: 80%;
+	}
+	
+}
+
+
+@media only screen and (max-width: 768px) {
+    #divToolbarTelestrator{
+        visibility: hidden;
+        display: none;
+    }
+    #divToolbarMobile {
+        visibility: visible;
+        display: none;
+    }
+	
+}
+
+@media only screen and (min-width: 768px) {
+    #divToolbarTelestrator{
+        visibility: visible;
+    }
+    #divToolbarMobile {
+        visibility: hidden;
+        position: fixed;
+        display: none;
+    }
+}
+
+#janelaModal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 4%;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    overflow: auto;
+}
+
+#imgModal{
+    margin: auto;
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+}
+
+#btFechar{
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.participantesPequeno {
+	width: 260px;
+	height: 315px;
+}

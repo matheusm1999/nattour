@@ -1,0 +1,97 @@
+.thumbvideo {
+    width: 50px;
+    height: 20px;
+}
+
+.videoTelaLargura{
+    width: auto;
+    height: 50%;
+}
+
+.videoTelaAltura{
+    width: 80%;
+    height: auto;
+}
+
+.MidtamanhoPagina{
+   width: 50%;
+   margin-left: auto;
+   margin-right: auto;  
+}
+
+.centroid{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 25%;
+    
+}
+
+.direito{
+    position: absolute;
+    right: auto;
+}
+
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  
+  .card {
+    display: inline-block;
+  }
+}
+
+.scrolling-wrapper {
+  -webkit-overflow-scrolling: touch;
+}
+
+
+.BarraTop{
+    background-color: lightgray;
+    overflow: hidden;
+}
+
+.flutante{
+    z-index: 1;
+    position: absolute;    
+}
+
+.footer{
+	background-color: #E6E6E6;
+	
+}
+
+.top-bar{
+	padding: 5px;
+}
+
+.callout{
+	margin: 0 0 5px 0;
+}
+
+textarea{
+	resize: none;
+}
+
+@media only screen and (max-width: 768px){
+	.videoTelaAltura{
+		width: 100%;
+		height: auto;
+	}
+	
+	.MidtamanhoPagina{
+	   width: 100%;
+	   margin-left: auto;
+	   margin-right: auto; 
+	
+	}
+	
+}
+
+@media only screen and (min-width: 768px){
+	.tamanhoDiv{
+		width: 80%;
+	}
+	
+}

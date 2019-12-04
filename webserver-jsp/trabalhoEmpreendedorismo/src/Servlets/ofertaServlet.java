@@ -1,0 +1,106 @@
+package Servlets;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Locale;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import BO.Oferta;
+import BO.Requisicao;
+import BO.User;
+import Servicos.RequisicaoServicos;
+import Servicos.ofertaServicos;
+
+/**
+ * Servlet implementation class ofertaServlet
+ */
+@WebServlet("/ofertaServlet")
+public class ofertaServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ofertaServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String paramAcao = request.getParameter("Acao");
+		//System.out.println("ParamAcaaaaaaoo: " + paramAcao);
+		System.out.println("Servlet chamado");
+		if(paramAcao.equals("buscarRequisicoes")){
+			System.out.println("Buscando requisiçoes");
+			//ofertaServicos os = new ofertaServicos();
+			RequisicaoServicos rs = new RequisicaoServicos();
+			
+			ArrayList<Requisicao> requisicoes = new ArrayList<Requisicao>();
+			requisicoes = rs.recuperarRequisicao();
+			
+			RequestDispatcher rd = request.getRequestDispatcher("selecionarRequisicao.jsp"); //para qual jsp vou enviar meu request
+			request.setAttribute("requisicoes", requisicoes); //coloco o atributo (nome da empresa) na requisição
+			rd.forward(request, response);  //encaminho para o jsp
+			
+			//System.out.println(requisicoes.get(0)); //para ver se está funcionando
+			
+			
+			}
+		else if(paramAcao.equals("fazerOferta")){
+			User user = (User) request.getSession(false).getAttribute("usuarioLogado");
+			
+			RequisicaoServicos rs = new RequisicaoServicos();
+			Requisicao requisicao = new Requisicao();
+			
+			int id = Integer.parseInt(request.getParameter("campoId"));
+			requisicao = rs.recuprerRequisicaoId(id);
+			System.out.println("Oferta será feita para: " + id);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("fazerOferta.jsp"); //para qual jsp vou enviar meu request
+			request.setAttribute("requisicao", requisicao); //coloco o atributo (nome da empresa) na requisição
+			rd.forward(request, response);  //encaminho para o jsp
+			
+		}
+		else if(paramAcao.equals("enviarOferta")){
+			float campoValor = Float.parseFloat(request.getParameter("campoValor"));	
+			String campoObservacao = request.getParameter("campoObservacao");
+			int idRequest = Integer.parseInt(request.getParameter("campoId"));
+			
+			//System.out.println("IDREQUEST:" + idRequest);
+			
+			Oferta oferta = new Oferta(campoValor,campoObservacao,idRequest);
+			ofertaServicos os = new ofertaServicos();
+			os.enviarOferta(oferta);
+		}
+		else if(paramAcao.equals("buscarOfertas")){
+			System.out.println("Buscando ofertas");
+			ArrayList<Oferta> ofertas;
+			Requisicao requisicao;
+			int idRequisicao = Integer.parseInt(request.getParameter("campoIdRequisicao"));
+			
+			
+			ofertaServicos os = new ofertaServicos();
+			RequisicaoServicos rs = new RequisicaoServicos();
+			
+			ofertas = os.buscarOferta(idRequisicao);
+			requisicao = rs.recuprerRequisicaoId(idRequisicao);
+			System.out.println(ofertas);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("ofertas.jsp"); //para qual jsp vou enviar meu request
+			request.setAttribute("ofertas", ofertas); //coloco o atributo (nome da empresa) na requisição
+			request.setAttribute("requisicao", requisicao);
+			rd.forward(request, response);  //encaminho para o jsp
+			
+		}
+	}
+
+}
