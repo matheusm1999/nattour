@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import BO.Oferta;
 import BO.Requisicao;
@@ -39,6 +40,10 @@ public class ofertaServlet extends HttpServlet {
 		String paramAcao = request.getParameter("Acao");
 		//System.out.println("ParamAcaaaaaaoo: " + paramAcao);
 		System.out.println("Servlet chamado");
+		//Essa sessão foi criado no servlet de login
+		HttpSession sessao = request.getSession(false); 
+		User user = (User) sessao.getAttribute("usuarioLogado");
+		
 		if(paramAcao.equals("buscarRequisicoes")){
 			System.out.println("Buscando requisiçoes");
 			//ofertaServicos os = new ofertaServicos();
@@ -56,8 +61,6 @@ public class ofertaServlet extends HttpServlet {
 			
 			}
 		else if(paramAcao.equals("fazerOferta")){
-			User user = (User) request.getSession(false).getAttribute("usuarioLogado");
-			
 			RequisicaoServicos rs = new RequisicaoServicos();
 			Requisicao requisicao = new Requisicao();
 			
@@ -71,13 +74,16 @@ public class ofertaServlet extends HttpServlet {
 			
 		}
 		else if(paramAcao.equals("enviarOferta")){
+			System.out.println("Enviando Oferta...");
 			float campoValor = Float.parseFloat(request.getParameter("campoValor"));	
 			String campoObservacao = request.getParameter("campoObservacao");
 			int idRequest = Integer.parseInt(request.getParameter("campoId"));
 			
 			//System.out.println("IDREQUEST:" + idRequest);
 			
+			int idGUser = user.getUserID();
 			Oferta oferta = new Oferta(campoValor,campoObservacao,idRequest);
+			oferta.setIdGUser(idGUser);
 			ofertaServicos os = new ofertaServicos();
 			os.enviarOferta(oferta);
 		}

@@ -112,6 +112,13 @@
 	     <div class ="form-group col-md-4"></div>
 	     <div class ="form-group col-md-4"></div>
 	     <form action ="${linkOfertaServlet}" method ="get">
+	     	<c:if test = "${empty ofertas}">
+	     		<div class = "col-md-12">
+		     		<div class="alert alert-info" role="alert">
+	  					<p style = "padding-right: 40px; text-align: center;">Não há nenhuma oferta feita no momento!</p>
+					</div>
+				</div>
+	     	</c:if>
 	     	<c:forEach items="${ofertas}" var = "oferta">
 		        		<div class ="form-group col-md-2"></div>
 		        		<div class="card" style="width: 25rem;">

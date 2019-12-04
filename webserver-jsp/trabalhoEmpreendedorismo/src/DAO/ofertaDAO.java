@@ -47,8 +47,7 @@ public class ofertaDAO {
 			PreparedStatement ps = connection.prepareStatement(SQLInsereOferta);
 			ps.setString(1, observacao);
 			ps.setFloat(2, valor);
-			ps.setInt(3, 2); //Esse valor 2 é um padrão. Mudar depois no banco de dados
-			//Conseguir pegar o id do usuário quando ele logar e então usar esse id ao invés de "2"
+			ps.setInt(3, idGUser); 
 			ps.setInt(4, idRequest);
 
 			ps.execute();

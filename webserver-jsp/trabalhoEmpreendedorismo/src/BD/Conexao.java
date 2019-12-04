@@ -4,7 +4,7 @@ package BD;
  
   
  
-//Classes necess√°rias para uso de Banco de dados //
+//Classes neces·rias para uso de Banco de dados //
  
 import java.sql.Connection;
  
