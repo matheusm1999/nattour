@@ -16,6 +16,10 @@ public class User {
 	private int isGuide;
 	private int isTourist;
 	
+	public User(){
+		
+	}
+	
 	public int getIsGuide() {
 		return isGuide;
 	}
@@ -77,6 +81,15 @@ public class User {
 		this.fotoFacebook = fotoFacebook;
 		this.cidade = cidade;
 		this.name = name;
+	}
+	
+	public User(int idUsuario, String idFacebook, String fotoFacebook,Cidade cidade, String name, String email){
+		this.idFacebook  = idFacebook;
+		this.userID = idUsuario;
+		this.fotoFacebook = fotoFacebook;
+		this.cidade = cidade;
+		this.name = name;
+		this.email = email;
 	}
 
 	public User(String idFacebook, String fotoFacebook,String name,String emailFacebook){
@@ -149,6 +162,13 @@ public class User {
 
 	public void setFotoFacebook(String fotoFacebook) {
 		this.fotoFacebook = fotoFacebook;
+	}
+	
+	@Override
+	public String toString(){
+		return "name: " + this.name +
+				"\nemail: " + this.email +
+				"\nid: " + this.userID;
 	}
 		
 }

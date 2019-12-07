@@ -6,6 +6,7 @@ public class Oferta {
 	private int idOferta;
 	private int idGUser;
 	private int idRequest;
+	private User user;
 
 	
 	public Oferta(float valor,String description,int idRequest){
@@ -60,13 +61,23 @@ public class Oferta {
 	public void setIdRequest(int idRequest) {
 		this.idRequest = idRequest;
 	}
-		
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	
 	@Override
 	public String toString(){
 		return "idOferta: " + this.idOferta+
 				"\nValor: " + this.valor+
 				"\nidGUser: " + this.idGUser+ 
-				"\nidRequest: " + this.idRequest;
+				"\nidRequest: " + this.idRequest +  
+				"\n" + this.user.toString();
 	}
 	
 }

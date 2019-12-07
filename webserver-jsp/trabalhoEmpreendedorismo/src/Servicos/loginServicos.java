@@ -99,7 +99,7 @@ public class loginServicos {
 		userDAO ud = new userDAO(connection);
 		String idFacebook = user.getIdFacebook();
 		try {
-			user = ud.selectUserID(idFacebook); //pode ser null ou não
+			user = ud.selectUserIDFacebook(idFacebook); //pode ser null ou não
 			//connection.commit(); //Talvez seja melhor tirar pq dessa forma, não garanto a integridade completa da minha transação...
 			//Apenas dessa parte do código. Se outro método usar essa função, melhor tirar esse commit, e deixar apenas no método
 			//Que chamou esse método.

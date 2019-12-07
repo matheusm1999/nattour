@@ -15,8 +15,9 @@ import BO.User;
 public class userDAO {
 	
 	private String SQLInsertUser = "INSERT INTO USER (email,name,hash,salt,idTRating,idGRating,idCity,isGuide,isTourist,docValue,docType,idFacebook,fotoFacebook,ddi,ddd,numeroTelefone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private String SQLSelectUser = "SELECT * FROM user where idFacebook = ?";
+	private String SQLSelectUserIDFacebook = "SELECT * FROM user where idFacebook = ?";
 	private String SQLUpdateUserIsGuia = "UPDATE user SET isGuide = 1, ddd = ?, ddi = ?, numeroTelefone = ? WHERE id = ?";
+	private String SQLSelectUserID = "SELECT * FROM user WHERE id = ?";
 	private Connection connection;
 	
 	public userDAO(Connection connection){
@@ -71,9 +72,9 @@ public class userDAO {
 	//Saída: usuário com o id do Facebook associado
 	//Pré condição: Esse id deve vir após a conexão com o Facebook
 	//Pós condiçao:Nenhuma
-	public User selectUserID(String idFacebook) throws SQLException{
+	public User selectUserIDFacebook(String idFacebook) throws SQLException{
 		User user = null;
-		PreparedStatement ps = connection.prepareStatement(SQLSelectUser);
+		PreparedStatement ps = connection.prepareStatement(SQLSelectUserIDFacebook);
 		ps.setString(1, idFacebook);
 		ResultSet rs = ps.executeQuery();
 		
@@ -118,5 +119,35 @@ public class userDAO {
 		ps.execute();
 	}
 
+	//Busca o usuário no banco de dados, na entidade "user" por meio do seu ID
+	//Entrada: Id do usuarío a ser buscado no banco de dados
+	//Saída: Usuário associado ao ID passado nos parâmetros
+	public User selectUserID(int idUsuario) throws SQLException{
+		User user = null;
+		PreparedStatement ps = connection.prepareStatement(SQLSelectUserID);
+		ps.setInt(1, idUsuario);
+		ResultSet rs = ps.executeQuery();
+		
+		rs.next();
+		//Pegando os valores dos atributos
+		int id = rs.getInt("id");
+		//System.out.println("idd: " + id);
+		String name = rs.getString("name");
+		int idCity = rs.getInt("idCity");
+		String idFacebook = rs.getString("idFacebook");
+		String fotoFacebook = rs.getString("fotoFacebook");
+		int isGuide = rs.getInt("isGuide");
+		int isTourist = rs.getInt("isTourist");
+		String email = rs.getString("email");
+		
+		//Criando os os objetos
+		Cidade cidade = new Cidade(idCity);
+		user = new User(id,idFacebook,fotoFacebook,cidade,name,email);
+		user.setIsGuide(isGuide);
+		user.setIsTourist(isTourist);
+		
+		//System.out.println(user);
+		return user;
+	}
 }
  

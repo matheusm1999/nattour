@@ -6,8 +6,10 @@ import java.util.ArrayList;
 
 import BD.Conexao;
 import BO.Oferta;
+import BO.User;
 import DAO.geralDAO;
 import DAO.ofertaDAO;
+import DAO.userDAO;
 
 public class ofertaServicos {
 	
@@ -40,15 +42,44 @@ public class ofertaServicos {
 	
 	public ArrayList<Oferta> buscarOferta(int idRequisicao){
 		Connection connection = Conexao.getConnection();
-		ofertaDAO od = new ofertaDAO(connection);
 		
+		ofertaDAO od = new ofertaDAO(connection);
+		userDAO ud = new userDAO(connection);
+		
+		User user;
 		ArrayList<Oferta> ofertas = new ArrayList<Oferta>();
 		try {
 			ofertas = od.buscarOferta(idRequisicao);
+			for(int i = 0; i <ofertas.size();i++){
+				user = ud.selectUserID(ofertas.get(i).getIdGUser());
+				ofertas.get(i).setUser(user);
+			}
 		} catch (SQLException e) {
 			System.out.println("Erro ao buscar a Requisição!");
 			e.printStackTrace();
 		}
 		return ofertas;
+	}
+
+	//Busca uma oferta no banco de dados, na tabela "Offer", por meio do seu ID
+	public Oferta buscarOfertaID(int idOferta){
+		Connection connection = Conexao.getConnection();
+		Oferta oferta = null;
+		User user = null;
+		ofertaDAO od = new ofertaDAO(connection);
+		userDAO us = new userDAO(connection);
+		try {
+			oferta = od.buscarOfertaId(idOferta);
+			user = us.selectUserID(oferta.getIdGUser());
+			oferta.setUser(user);
+		} catch (SQLException e) {
+			System.out.println("Erro ao Buscar a oferta!");
+			e.printStackTrace();
+		}
+		catch(NullPointerException n){
+			System.out.println("Oferta não existe no banco de dados!");
+			n.printStackTrace();
+		}
+		return oferta;
 	}
 }

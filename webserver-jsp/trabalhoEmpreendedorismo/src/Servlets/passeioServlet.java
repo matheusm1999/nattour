@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,8 @@ import BO.Cidade;
 import BO.Requisicao;
 import BO.User;
 import Servicos.RequisicaoServicos;
+import Servicos.tagServicos;
+import BO.Tag;
 
 /**
  * Servlet implementation class passeioServlet
@@ -61,6 +64,16 @@ public class passeioServlet extends HttpServlet {
     		rd.forward(request, response);  //encaminho para o jsp
 			//response.sendRedirect("/trabalhoEmpreendedorismo/ofertas.jsp");
 			
+		}
+		if(paramAcao.equals("inicio")){
+			System.out.println("Buscando tags e cidades...");
+			User user = (User) request.getSession(false).getAttribute("usuarioLogado");
+			tagServicos ts = new tagServicos();
+			ArrayList<Tag> tags = ts.buscarTags();
+		
+			RequestDispatcher rd = request.getRequestDispatcher("/fazerRequisicao.jsp"); //para qual jsp vou enviar meu request
+    		request.setAttribute("tags", tags); //coloco o atributo (nome da empresa) na requisição
+    		rd.forward(request, response);  //encaminho para o jsp
 		}
 	}
 

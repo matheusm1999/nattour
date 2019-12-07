@@ -81,10 +81,12 @@
       </nav>                                
       <div class="container-fluid">
       <div class = "form-row">
-	      	<div class = "form-group col-md-4"></div>
-	      	<div class = "form-group col-md-4">
-		        	<h1 class="mt-4" style = "text-align: center">Escolher oferta</h1>
-		        		<div class="card" style="width: 25rem;">
+	      	<div class = "form-group col-md-12 col-lg-12">
+	      	<h1 class="mt-4" style = "text-align: center">Escolher oferta</h1>
+	      	</div>
+	      	<div class = "form-group col-md-3 col-lg-3"></div>
+	      	<div class = "form-group col-md-6 col-lg-6">
+		        		<div class="card">
 					  		<div class="card-body">
 						    	<h5 class="card-title">${requisicao.title}</h5>
 						       	<p class="card-text">${requisicao.description}</p>
@@ -94,46 +96,64 @@
 					  		</div>
 						</div>	       		
 		        </div>
-	     
-	     	<div class = "form-group col-md-2"></div>
-	     	<div class = "form-group col-md-4"></div>
-		     <div class = "form-group col-md-2"></div>
-		     <form action="${linkOfertaServlet}" method = "get">
-		      	 <div>
-		      		<button class = "btn btn-primary" style="margin-right:50%;" type = "submit">Buscar ofertas</button>
+			<div class = "form-group col-md-3 col-lg-3"></div>	     
+		    <div class = "form-group col-md-12 col-lg-12" style= "text-align: center;">
+		     	<form action="${linkOfertaServlet}" method = "get">
+		      		<button class = "btn btn-primary" type = "submit">Buscar ofertas</button>
 		      		<input type = "hidden" name = "Acao" value = "buscarOfertas">
 					<input name = "campoIdRequisicao" value="${requisicao.idRequest}" type = "hidden">			    	
-		      	</div>
-		     </form>
+		     	</form>
+		     </div>
 	     </div>
-	     <div class ="form-row">
-	     <div class ="form-group col-md-4"></div>
-	     <div class ="form-group col-md-4"></div>
-	     <div class ="form-group col-md-4"></div>
-	     <div class ="form-group col-md-4"></div>
-	     	<c:if test = "${empty ofertas}">
-	     		<div class = "col-md-12">
+	    	<c:if test = "${empty ofertas}">
+	     		<div class = "col-md-12 col-lg-12" style="text-align: center;">
 		     		<div class="alert alert-info" role="alert">
-	  					<p style = "padding-right: 40px; text-align: center;">Não há nenhuma oferta feita no momento!</p>
+	  					<p style = "text-align: center;">Não há nenhuma oferta feita no momento!</p>
 					</div>
 				</div>
 	     	</c:if>
+	     	<div class = "form-row">
 	     	<c:forEach items="${ofertas}" var = "oferta">
+	     	<div class ="form-group col-md-6 col-lg-6">
 	     		<form action ="${linkOfertaServlet}" method ="get">
-		        		<div class ="form-group col-md-2"></div>
-		        		<div class="card" style="width: 25rem;">
-					  		<div class="card-body">
-						    	<h5 class="card-title" style="text-align: left;">R$ ${oferta.valor}</h5>
-						       	<p class="card-text" style="text-align:left;">Obs: ${oferta.description}</p>
-						    	<button class ="btn btn-link" type = "submit" style="margin-left: 90px;">Ver</button>
-						    	<input type = "hidden" name = "Acao" value = "verOferta">
-						    	<input name = "campoId" value="${oferta.idOferta}" type = "hidden">
+		        	    <div class="card">
+					  	    <div class="card-body">
+						  	    	<div class = "form-row">
+						  	    	<div class = "col-lg-12">
+							        	<h5 class="card-title" style="text-align: center;">R$ ${oferta.valor}</h5>
+							       	</div>
+							       	<div class = "col-lg-12" style="margin-bottom: 10px;">
+							       		<p class="card-text" style="text-align:left;">Obs: ${oferta.description}</p>
+							    	</div>
+							    	<div class = "col-lg-12" style = "background-color: #DCDCDC ">
+							    		<div class ="form-row">
+								    		<div class = "col-lg-3">
+								    			<img src= "${oferta.user.fotoFacebook}" class ="rounded-circle" style="height: 70px; margin-top: 5px;">
+								    		</div>
+									    	<div class = "col-lg-4">
+									    		<p style = "margin-top: 5px;">Avaliação 5.0/5.0</p>
+									    	</div>
+							    		</div>
+							    		<div class = "col-lg-4">
+							    			${oferta.user.name}
+							    		</div>
+							    	<div class = "col-lg-5"></div>
+							    	</div>
+							    	<div class = "col-lg-6" style = "text-align: right;">
+							    		<button class ="btn btn-primary" type = "submit" style = "margin-top: 10px;">Aceitar</button>
+							    	</div>
+							    	<div class = "col-lg-6" style = "text-align: left;">
+							    		<button class ="btn btn-danger" type = "submit" style = "margin-top: 10px;">Recusar</button>
+							    	</div>
+							    	<input type = "hidden" name = "Acao" value = "verOferta">
+							    	<input name = "campoId" value="${oferta.idOferta}" type = "hidden">
+					  			</div>
 					  		</div>
-						</div>	        	       	
-		 		</form>
-		 		<div class ="form-group col-md-3"></div>
+						</div>
+						</form>	
+						</div>        	       	
 		 	</c:forEach>
-		 </div>
+		 	</div>
 	</div>
 	</div>	   
 	</div>
