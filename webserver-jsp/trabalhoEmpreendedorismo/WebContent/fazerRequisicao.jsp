@@ -16,7 +16,7 @@
    padding:5x;
 	margin-left: 500px; 
 	margin : auto;
-	border-radius: 10px;	
+	border-radius: 15px;	
 }
   </style>
   <title>FE</title>
@@ -81,72 +81,101 @@
       </nav>
 
       <div class="container-fluid">
-        <h1 class="mt-4" style = "text-align: center">Solicitar Passeio</h1>
         <form action ="${linkPasseioServlet}" method ="get">
         	<div class = "form-row">
-        		<div class = "form-group col-md-4"> </div>
-	        	<div class = "form-group col-md-4">
-	        		<label style = "margin-top:10px;">Título do Passeio</label> 
+	        	<div class ="col-md-12 col-lg-12" style = "text-align: center">  
+	        		<h1 class="mt-4" >Solicitar Passeio</h1>
+	        	</div>
+	        	<div class = "col-md-2 col-lg-2"></div>
+	        	<div class = "col-md-8 col-lg-8">
+	        		<label style = "margin-top:15px;">Título do Passeio</label> 
 	        		<input class ="form-control" name ="campoTitulo" placeholder="Ex: Passeio nas Cataratas">
 	        	</div>
-	        
-	        <div class = "form-group col-md-4"> </div>
-	        <div class = "form-group col-md-4"> </div>
-	        <div class = "form-group col-md-4">
-	        		<label>Descrição</label> 
-	        	    <input class ="form-control" style="padding-bottom: 100px;" name ="campoDescricao">
+	        <div class = "col-md-2 col-lg-2"> </div>
+	        <div class = "col-md-2 col-lg-2"> </div>
+	        <div class = "col-md-8 col-lg-8">
+	        		<label style = "margin-top: 15px;">Descrição</label> 
+	        	    <textarea class ="form-control" style="padding-bottom: 50px;" name ="campoDescricao"></textarea>
 	        </div>
-	        <div class = "form-group col-md-4"> </div>
-	        <div class = "form-group col-md-4"> </div>
-	        <div class = "form-group col-md-2"> 
+	        <div class = "col-md-2 col-lg-2"> </div>
+	        <div class = "col-md-2 col-lg-2"> </div>
+	        <div class = "col-sm-6 col-md-4 col-lg-4" style="margin-top: 15px;"> 
 	        		<label>Data Início</label>
-	        	    <input class ="form-control" name ="campoDataInicio" type="date" style = "padding-right: 10px;" >
+	        	    <input class ="form-control" name ="campoDataInicio" type="date" style = "padding-right: 15px;" >
 	        </div>
-	        <div class = "form-group col-md-2">
+	        <div class = "col-sm-6 col-md-4 col-lg-4" style="margin-top: 15px;">
 	        	<label>Data Fim</label> 
-	        	<input class ="form-control" name ="campoDataFim" type="date" style = "padding-right: 10px;">
+	        	<input class ="form-control" name ="campoDataFim" type="date" style = "padding-right: 15px;">
 	        </div>
-	        <div class = "form-group col-md-4"> </div>
-	        <div class = "form-group col-md-4"> </div> 
-	        <div class = "form-group col-md-1">
+	        <div class = " col-md-2 col-lg-2"></div> 
+	        <div class = " col-md-2 col-lg-2"></div> 
+	        <div class = "col-sm-4 col-md-2 col-lg-2" style="margin-top: 15px;">
 	        	<label>País</label> 
-	        	<select class ="form-control" name ="campoPais"  style="width: 115px;" >
+	        	<select class ="form-control" name ="campoPais" >
 		        	<option>Brasil</option>
 		        	<option>Estados Unidos</option>
 		        	<option>Canada</option>
 	        	</select>
 	        </div>
-	        <div class = "form-group col-md-1">
-	        	<label style="margin-left: 30px;">Estado</label> 
-	        	<select class ="form-control" name ="campoEstado" style="width: 100px; margin-left: 30px;" >
+	        <div class = "col-sm-4 col-md-3 col-lg-3" style="margin-top: 15px;">
+	        	<label>Estado</label> 
+	        	<select class ="form-control" name ="campoEstado">
 	        		<option>Parana</option>
 	        		<option>Nova York</option>
 	        		<option>Quebec</option>
 	        	</select>
 	        </div>
-	        <div class = "form-group col-md-1">
-	        	<label style="margin-left: 60px;">Cidade</label> 
-	        	<select class="form-control" name ="campoCidade" style=" display: block;margin-left: 45px; width: 130px;" > 
+	        <div class = "col-sm-4 col-md-3 col-lg-3" style="margin-top: 15px;">
+	        	<label>Cidade</label> 
+	        	<select class="form-control" name ="campoCidade" > 
 	        		<option value= "Foz do Iguacu">Foz do Iguacu</option>
 	        		<option value = "Nova York">Nova York</option>
 	        		<option value = "Quebec">Quebec</option>
 	        	</select>
 	        </div>
-	        <div class = "form-group col-md-4"> </div>
-	        <div class = "form-group col-md-4"> </div>
-	         <div class = "form-group col-md-4">
-	        	    <label>Complemento</label> 
+	        <div class = "col-md-2 col-lg-2"></div>
+	        <div class = "col-md-2 col-lg-2"></div>
+	         <div class = "col-sm-12 col-md-8 col-lg-8" style="margin-top: 15px;">
+	        	    <label>Local de Encontro</label> 
 	        	    <input class ="form-control" name ="campoComplemento" >
 	        </div>
+	        <div class = "col-md-2 col-lg-2"></div>
 	        <input type = "hidden" value = "${user.userID}" name = "idTuser">
-	        <div class = "form-group col-md-4"> </div>
-	        <div class = "form-group col-md-4"> </div>
-	        <div class = "form-group col-md-4">
-	        		<label>Tags</label> 
-	        	    <input class ="form-control" style="padding-bottom: 100px;" name ="campoDescricao">
-	        		<a href= "trabalhoEmpreendedorismo/index.jsp"><button class="button" type ="submit" style="margin-top: 20px; margin-left: 290px;"> Enviar </button></a>
-	        		<input type="hidden" name="acao" value ="cadastrarRequest">
+	        <div class = "col-md-2 col-lg-2"></div>
+	        <div class = "col-sm-12 col-md-8 col-md-8" style= "text-align: center;" style="margin-top: 15px;">
+	        	<h3>Tags</h3>
 	        </div>
+	        <div class = "col-md-2 col-lg-2"></div>
+	        <div class = "col-md-2 col-lg-2"></div>
+	        <div class = "col-sm-6 col-md-4" style="margin-top: 15px;"> 
+	        	    <select class ="form-control">
+						<option value="volvo">Um</option>
+						<option value="saab">Saab</option>
+						<option value="mercedes">Mercedes</option>
+						<option value="audi">Audi</option>
+					</select>
+	        </div>
+	        <div class = "col-sm-6 col-md-4 col-lg-4" style="margin-top: 15px;"> 
+	        	    <select class ="form-control">
+						<option value="volvo">Dois</option>
+						<option value="saab">Saab</option>
+						<option value="mercedes">Mercedes</option>
+						<option value="audi">Audi</option>
+					</select>
+	        </div>
+	        <div class = "col-md-2 col-lg-2"></div>
+	        <div class = "col-md-2 col-lg-2"></div>
+	        <div class = "col-sm-12 col-md-8 col-lg-8"> 
+	        	    <select class ="form-control" style="margin-top: 15px;">
+						<option value="volvo">Tres</option>
+						<option value="saab">Saab</option>
+						<option value="mercedes">Mercedes</option>
+						<option value="audi">Audi</option>
+					</select>
+	        </div>
+	        <div class = "col-md-2 col-lg-2"></div>
+	        <a href= "trabalhoEmpreendedorismo/index.jsp"><button class="button" type ="submit" style="margin-top: 20px; margin-left: 290px;"> Enviar </button></a>
+	        <input type="hidden" name="acao" value ="cadastrarRequest">
 	        
 	        </div>
         	</form>		
