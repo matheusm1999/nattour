@@ -11,7 +11,8 @@ import BO.Oferta;
 public class ofertaDAO {
 	private Connection connection;
 	String SQLInsereOferta = "INSERT INTO offer (description,price,idGUser,idRequest) VALUES (?,?,?,?)";
-	String SQLSelectOfertaId = "SELECT * FROM offer WHERE idRequest = ?";
+	String SQLSelectOfertaIdRequest = "SELECT * FROM offer WHERE idRequest = ?";
+	String SQLSelectOfertaId = "SELECT * FROM offer WHERE id = ?";
 	
 	public ofertaDAO(Connection connection){
 		this.connection = connection;
@@ -53,13 +54,13 @@ public class ofertaDAO {
 			ps.execute();
 		}
 
-		//Busca as ofertas feita para uma determinada requisição específicada por meio do parâmetro idRequisicao
+		//Busca as ofertas feita para uma determinada requisição por meio do parâmetro idRequisicao
 		//Entrada: Id da requisição a ser utilizada para buscar no banco de dados uma oferta feita
 		//Saída: Ofertas feitas para aquela requição que possúi o id específicado nos parâmetros
 		public ArrayList<Oferta> buscarOferta(int idRequisicao) throws SQLException{
 			ArrayList<Oferta> ofertas = new ArrayList<Oferta>();
 			
-			PreparedStatement ps = connection.prepareStatement(SQLSelectOfertaId);
+			PreparedStatement ps = connection.prepareStatement(SQLSelectOfertaIdRequest);
 			ps.setInt(1, idRequisicao);
 			
 			ResultSet rs = ps.executeQuery();
@@ -75,5 +76,30 @@ public class ofertaDAO {
 				ofertas.add(oferta);
 			}
 			return ofertas;
+		}
+
+		//Busca a oferta no banco de dados por meio do id da oferta
+		//Entrada: Id da oferta a ser buscada
+		//Saída: Objeto oferta populado de acordo com o seu id no banco de dados
+		//Pré condição: Nenhuma
+		//Pós condição: Nenhuma
+		public Oferta buscarOfertaId (int idOferta) throws SQLException{
+			Oferta oferta = null;
+			
+			PreparedStatement ps = connection.prepareStatement(SQLSelectOfertaId);
+			ps.setInt(1, idOferta);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+			int id = rs.getInt("id");
+			String description = rs.getString("description");
+			float price = rs.getFloat("price");
+			int idGUser = rs.getInt("idGUser");
+			int idRequest = rs.getInt("idRequest");
+				
+			oferta = new Oferta(id,idGUser,price,description,idRequest);
+			
+			return oferta;
 		}
 }

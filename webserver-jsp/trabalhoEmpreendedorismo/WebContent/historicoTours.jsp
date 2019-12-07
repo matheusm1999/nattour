@@ -40,11 +40,11 @@
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="sidebar-heading">Menu </div>
       <div class="list-group list-group-flush">
-      	    <a href="Turista/fazerRequisicao.jsp" class="list-group-item list-group-item-action bg-light">Solicitar Tour</a>
-      	    <a href="Turista/historicoTours.jsp" class="list-group-item list-group-item-action bg-light">Histórico de tours</a>
+      	    <a href="fazerRequisicao.jsp" class="list-group-item list-group-item-action bg-light">Solicitar Tour</a>
+      	    <a href="historicoTours.jsp" class="list-group-item list-group-item-action bg-light">Histórico de tours</a>
 			<a href="#" class="list-group-item list-group-item-action bg-light">Tour em progresso</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Chat</a>
-            <a href="Tuista/virarGuia.jsp" class="list-group-item list-group-item-action bg-light">Torne-se um guia</a>
+            <a href="virarGuia.jsp" class="list-group-item list-group-item-action bg-light">Torne-se um guia</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Sair</a>
 	  </div>
     </div>
@@ -85,38 +85,39 @@
         </div>
       </nav>
 
-      <div class="container-fluid">
+      <div class="container">
       <div class = "form-row">
       <!--<a style = "margin-left: 100px;"href="<c:url value='/ofertaServlet' />">Click here</a> -->	
       
-      <div class ="form-group col-md-4"></div>
-      <h2 class="h2"style = "text-align: center">Verificar histórico de tours</h2>
-      <div class ="form-group col-md-5"></div>
-      <div style = "text-align: center; ">
-      	<form action="${linkHistoricoServlet}" method = get>
-      		<button type = "submit" class ="btn btn-primary" style=" margin-bottom: 30px;">Atualizar histórico</button>
-      		<input type = "hidden" name = "Acao" value ="buscarHistoricoTour">
-      	</form>
+      <div class ="form-group col-md-12 col-lg-12 col-xl-12">
+      <h2 class="h2" style="text-align: center;">Verificar histórico de tours</h2>
+      </div>
+      
+      <div class ="form-group col-sm-12 col-md-12 col-lg-12" style = "text-align: center;">
+	      	<form action="${linkHistoricoServlet}" method = get>
+	      		<button type = "submit" class ="btn btn-primary" style="margin-bottom: 30px;">Atualizar histórico</button>
+	      		<input type = "hidden" name = "Acao" value ="buscarHistoricoTour">
+	      	</form>
       	</div>
-      	<div class = "form-group col-md-2"></div>
       	<c:forEach items="${requisicoes}" var = "requisicao">
-		    	<div class = "form-group col-md-4">
+      			
+		    	<div class = "form-group col-sm-12 col-md-6 col-lg-4" style = "text-align: center;">
 		        	<form action ="${linkOfertaServlet}" method ="get">
-		        		<div class="card" style="width: 18rem;margin-left:60px;">
+		        		<div class="card" >
 					  		<div class="card-body">
 						    	<h5 class="card-title">${requisicao.title}</h5>
 						       	<p class="card-text">${requisicao.description}</p>
 						    	<a class="card-text">Data início: ${requisicao.startsAt}</a>
 						    	<div class = "form-group cold-md-2"></div>
 						    	<a  style= "margin-top: 5px;" >Data fim: ${requisicao.endsAt}</a>
-						    	<button class ="btn btn-link" type = "submit" style="margin-left: 90px;">Ver</button>
+						    	<div class = "form-group cold-sm-2"></div>
+						    	<button class ="btn btn-link" type = "submit">Ver</button>
 						    	<input type = "hidden" name = "Acao" value = "buscarOfertas">
 						    	<input name = "campoIdRequisicao" value="${requisicao.idRequest}" type = "hidden">
 						    	<!--<a href="/trabalhoEmpreendedorismo/fazerOferta.jsp">Ver</a>-->
 						    	<!-- <input name = "campoId">${requisicao.idRequest} -->
 					  		</div>
-						</div>	
-						<div class = "form-group col-md-4"></div>       
+						</div>    
 		        	</form>		
 		        </div>
 		 </c:forEach>

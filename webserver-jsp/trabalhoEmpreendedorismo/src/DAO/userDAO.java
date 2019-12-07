@@ -14,7 +14,7 @@ import BO.User;
 
 public class userDAO {
 	
-	private String SQLInsertUser = "INSERT INTO USER (email,hash,name,salt,idTRating,idGRating,idCity,isGuide,isTourist,docValue,docType,idFacebook,fotoFacebook) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private String SQLInsertUser = "INSERT INTO USER (email,name,hash,salt,idTRating,idGRating,idCity,isGuide,isTourist,docValue,docType,idFacebook,fotoFacebook,ddi,ddd,numeroTelefone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private String SQLSelectUser = "SELECT * FROM user where idFacebook = ?";
 	private String SQLUpdateUserIsGuia = "UPDATE user SET isGuide = 1, ddd = ?, ddi = ?, numeroTelefone = ? WHERE id = ?";
 	private Connection connection;
@@ -52,6 +52,9 @@ public class userDAO {
 		ps.setString(11, "a");
 		ps.setString(12, idFacebook);
 		ps.setString(13, fotoFacebook);
+		ps.setInt(14, 0);
+		ps.setInt(15, 0);
+		ps.setInt(16, 0);
 		
 		ps.execute();
 		
@@ -114,5 +117,6 @@ public class userDAO {
 		
 		ps.execute();
 	}
+
 }
  

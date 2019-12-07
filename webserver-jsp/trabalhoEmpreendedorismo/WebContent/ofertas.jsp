@@ -111,7 +111,6 @@
 	     <div class ="form-group col-md-4"></div>
 	     <div class ="form-group col-md-4"></div>
 	     <div class ="form-group col-md-4"></div>
-	     <form action ="${linkOfertaServlet}" method ="get">
 	     	<c:if test = "${empty ofertas}">
 	     		<div class = "col-md-12">
 		     		<div class="alert alert-info" role="alert">
@@ -120,6 +119,7 @@
 				</div>
 	     	</c:if>
 	     	<c:forEach items="${ofertas}" var = "oferta">
+	     		<form action ="${linkOfertaServlet}" method ="get">
 		        		<div class ="form-group col-md-2"></div>
 		        		<div class="card" style="width: 25rem;">
 					  		<div class="card-body">
@@ -129,9 +129,10 @@
 						    	<input type = "hidden" name = "Acao" value = "verOferta">
 						    	<input name = "campoId" value="${oferta.idOferta}" type = "hidden">
 					  		</div>
-						</div>			        	       	
+						</div>	        	       	
+		 		</form>
+		 		<div class ="form-group col-md-3"></div>
 		 	</c:forEach>
-		 </form>
 		 </div>
 	</div>
 	</div>	   

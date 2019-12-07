@@ -111,13 +111,14 @@
 	        
 	        <!-- <fb:login-button size="large" scope="public_profile,email" returnscopes="true" onlogin="getLoginState();">Login to Facebook</fb:login-button> -->
 	        	        	  
-	        <button id = "custom-login-button">Login com Facebook</button>
+	        
 	        <input type = hidden name = "Acao" value = "logar">
 	        <a href= "/trabalhoEmpreendedorismo/index.jsp"><button class="button" type ="submit" >Entrar</button></a>	        	    
 	        <a href= "/trabalhoEmpreendedorismo/cadastro.jsp" style="padding-left: 30px;">Criar uma conta</a>
 	        
 	        </div>
         	</form> 		
+        <button id = "custom-login-button">Login com Facebook</button>
         </div>
      </div>
 	    </div>
@@ -129,8 +130,7 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<script>
-var person = {userID: "", name: "", acessToken: "", picture: "", email: ""};	
+<script>	
 
 /*
 function logIn() {
@@ -154,23 +154,125 @@ window.fbAsyncInit = function() {
       xfbml      : true,
       version    : 'v5.0'
     });
-    
+
+    /*//Descomentar essas linhas
     FB.getLoginStatus(function (response) {
     	statusChangeCallback(response);
-	});  
+	});
+	*/  
     //FB.AppEvents.logPageView();   
         
   }
+
+function statusChangeCallback(response){
+	//alert("MEnsagem");
+	console.log('Verificando o status...');
+	console.log(response);
+
+	//Se a pessoa logar
+	if(response.status === 'connected'){
+		console.log("conectado");
+		document.getElementById('status').innerHTML = 'connected';
+		document.getElementById('campoLogin').setAttribute('value',response.authResponse.userID);
+		//document.getElementById('campoEmail').setAttribute('value',response.authResponse.email);
+				
+		//location.replace("https://11462cd0.ngrok.io/trabalhoEmpreendedorismo/");
+								
+		//Mostro os dados dessa pessoa
+		
+		FB.api('/me',{fields: 'id,email,name,picture'},function(response){
+				console.log('Login com sucesso para: ' + response.name);
+				document.getElementById('status').innerHTML = 'Obrigrado por logar, ' + response.name + '!';
+				document.getElementById('campoSenha').value = response.name;
+				var email = document.getElementById('campoEmail').value;
+				var id = document.getElementById('campoLogin').value;
+				var image = "http://graph.facebook.com/" + response.id + "/picture?type=normal"
+				document.getElementById('campoFoto').value = image;
+				document.getElementById('status').innerHTML = "<img src= " + image + ">";
+				location.replace("https://66691ce5.ngrok.io/trabalhoEmpreendedorismo/loginServlet?Acao=loginFB&campoNome="+response.name+"&campoID=" + id + "&campoFoto=" + image+"&campoEmail=" + response.email);
+				//document.getElementById('status').innerHTML = response.authResponse.userID;
+				});	
+		//var nome = document.getElementById('campoSenha').value;
+		//console.log(nome);
+		
+		//FB.api('/me/picture','GET',{},function(response) {
+				//document.getElementById('status').innerHTML = "<img src= " + response.data.url + ">";	
+		//});
+	}else {
+		document.getElementById('status').innerHTML = 'Por favor, faça o login!';
+		/*
+		FB.login(function (response){
+			console.log(response);
+		}, {
+				scope: 'email',
+				return_scopes: true			
+			});
+		*/
+	}	
+}
+
+
 
 var el = document.getElementById('custom-login-button');
 if(el){
   //el.addEventListener('click', swapper, false);
   el.addEventListener('click', function(){
 	  console.log("Botao apertado");
-	    FB.login(function(response){
-				console.log("login customizado completo");
-				console.log(response);
+	   FB.login(function(response){
+				console.log("login customizado Iniciado");
+				//console.log(response);
+				//statusChangeCallback(response);
+				
+				FB.login(function(response){
+					//alert("MEnsagem");
+					console.log('Verificando o status...');
+					console.log(response);
 
+					//Se a pessoa logar
+					if(response.status === 'connected'){
+						
+						document.getElementById('status').innerHTML = 'connected';
+						document.getElementById('campoLogin').setAttribute('value',response.authResponse.userID);
+						//document.getElementById('campoEmail').setAttribute('value',response.authResponse.email);
+								
+						//location.replace("https://11462cd0.ngrok.io/trabalhoEmpreendedorismo/");
+												
+						//Mostro os dados dessa pessoa
+						
+						FB.api('/me',{fields: 'id,email,name,picture'},function(response){
+								console.log('Login com sucesso para: ' + response.name);
+								document.getElementById('status').innerHTML = 'Obrigrado por logar, ' + response.name + '!';
+								document.getElementById('campoSenha').value = response.name;
+								var email = document.getElementById('campoEmail').value;
+								var id = document.getElementById('campoLogin').value;
+								var image = "http://graph.facebook.com/" + response.id + "/picture?type=normal"
+								document.getElementById('campoFoto').value = image;
+								document.getElementById('status').innerHTML = "<img src= " + image + ">";
+								location.replace("https://66691ce5.ngrok.io/trabalhoEmpreendedorismo/loginServlet?Acao=loginFB&campoNome="+response.name+"&campoID=" + id + "&campoFoto=" + image+"&campoEmail=" + response.email);
+								//document.getElementById('status').innerHTML = response.authResponse.userID;
+								});	
+						//var nome = document.getElementById('campoSenha').value;
+						//console.log(nome);
+						
+						//FB.api('/me/picture','GET',{},function(response) {
+								//document.getElementById('status').innerHTML = "<img src= " + response.data.url + ">";	
+						//});
+					}else 
+						document.getElementById('status').innerHTML = 'Por favor, faça o login!';
+						/*
+						FB.login(function (response){
+							console.log(response);
+						}, {
+								scope: 'email',
+								return_scopes: true			
+							});
+						
+					}	
+								},{scope: 'public_profile,email'}); 
+  });
+  */
+ 
+			/*
 				FB.api('/me','get',{fields: 'id,name,email,picture'}, function(response){
 					console.log("resposta");
 					console.log(response);
@@ -181,68 +283,22 @@ if(el){
 				return_scopes: true
 		  });
 	});
-	  
-}
-
-	function statusChangeCallback(response){
-		console.log('Vendo o status...');
-		console.log(response);
-
-		//Se a pessoa logar
-		if(response.status === 'connected'){
-			document.getElementById('status').innerHTML = 'connected';
-			document.getElementById('campoLogin').setAttribute('value',response.authResponse.userID);
-			//document.getElementById('campoEmail').setAttribute('value',response.authResponse.email);
-					
-			//location.replace("https://11462cd0.ngrok.io/trabalhoEmpreendedorismo/");
-									
-			//Mostro os dados dessa pessoa
-			FB.api('/me',{fields: 'id,email,name,picture'},function(response){
-					console.log('Login com sucesso para: ' + response.name);
-					document.getElementById('status').innerHTML = 'Obrigrado por logar, ' + response.name + '!';
-					document.getElementById('campoSenha').value = response.name;
-					var email = document.getElementById('campoEmail').value;
-					var id = document.getElementById('campoLogin').value;
-					var image = "http://graph.facebook.com/" + response.id + "/picture?type=normal"
-					document.getElementById('campoFoto').value = image;
-					document.getElementById('status').innerHTML = "<img src= " + image + ">";
-					location.replace("https://d9aacc1a.ngrok.io/trabalhoEmpreendedorismo/loginServlet?Acao=loginFB&campoNome="+response.name+"&campoID=" + id + "&campoFoto=" + image+"&campoEmail=" + response.email);
-					//document.getElementById('status').innerHTML = response.authResponse.userID;
-					});	
-			//var nome = document.getElementById('campoSenha').value;
-			//console.log(nome);
-			
-			//FB.api('/me/picture','GET',{},function(response) {
-					//document.getElementById('status').innerHTML = "<img src= " + response.data.url + ">";	
-			//});
-		}else {
-			document.getElementById('status').innerHTML = 'Por favor, faça o login!';
-			/*
-			FB.login(function (response){
-				console.log(response);
-			}, {
-					scope: 'email',
-					return_scopes: true			
-				});
-			*/
-		}	
+	*/			  
+});
+	});
+	});
 	}
-
 
   
   (function(d, s, id){
      var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
+     if (d.getElementById(id)) return;
      js = d.createElement(s); js.id = id;
      js.src = "https://connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 
 
-  
 </script> 
-
-
 </body>
-
 </html>

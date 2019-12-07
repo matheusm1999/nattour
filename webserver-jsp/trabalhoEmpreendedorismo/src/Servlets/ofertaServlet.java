@@ -107,6 +107,15 @@ public class ofertaServlet extends HttpServlet {
 			rd.forward(request, response);  //encaminho para o jsp
 			
 		}
+		else if(paramAcao.equals("verOferta")){
+			RequestDispatcher rd = request.getRequestDispatcher("verOferta.jsp"); //para qual jsp vou enviar meu request
+			/*
+			request.getAttribute(arg0)
+			request.setAttribute("ofertas", ofertas); //coloco o atributo (nome da empresa) na requisição
+			request.setAttribute("requisicao", requisicao);
+			rd.forward(request, response);  //encaminho para o jsp
+			*/
+		}
 	}
 
 }
