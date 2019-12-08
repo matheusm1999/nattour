@@ -40,6 +40,7 @@ public class ofertaServicos {
 		}
 	}
 	
+	//Busca todas as ofertas de requisições no banco de dados
 	public ArrayList<Oferta> buscarOferta(int idRequisicao){
 		Connection connection = Conexao.getConnection();
 		

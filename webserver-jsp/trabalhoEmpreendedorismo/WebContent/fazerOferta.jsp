@@ -30,24 +30,11 @@
 </head>
 
 <body >
-
   <div class="d-flex" id="wrapper">
-
-    <!-- Sidebar -->
-    <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Menu </div>
-      <div class="list-group list-group-flush">
-      	    <a href="#" class="list-group-item list-group-item-action bg-light">Tour Concluídos</a>
-		    <a href="#" class="list-group-item list-group-item-action bg-light">Tour em progresso</a>
-			<a href="#" class="list-group-item list-group-item-action bg-light">Chat</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Torne-se um guia</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Sair</a>
-	  </div>
-    </div>
-    <!-- /#sidebar-wrapper -->
-
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
+	<%@ include file = "menu.jsp" %>
+	    <div id="page-content-wrapper">
+	<%@ include file = "restoHeader.jsp" %>
+    <!-- Page Content 
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <button class="btn btn-primary" id="menu-toggle">Esconder Menu</button>
@@ -77,61 +64,99 @@
           </ul>
         </div>
       </nav>
-
+-->
       <div class="container-fluid">
-      <div class = "form-row">
-		    	<div class = "form-group col-md-4" style = "margin: auto;">
-		        	<h1 class="mt-4">Realizar um lance</h1>
-		        		<div class="card center" style="width: 22rem; ">
+      <div class = "form-row"> 
+      	  <div class ="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style = "text-align: center;">	
+	          <h1 class="mt-4">Realizar um lance</h1>
+	      </div>
+	      <div class ="col-md-2 col-lg-2 col-xl-2"></div>	
+	   	  <div class = "form-group col-md-8 col-lg-8 col-xl-8" style = "text-align: center;">
+		        		<div class="card">
 					  		<div class="card-body">
 						    	<h5 class="card-title">${requisicao.title}</h5>
-						       	<p class="card-text">${requisicao.description}</p>
-						    	<a class="card-text">Data início: ${requisicao.startsAt}</a>
-						    	<div class = "form-group cold-md-2"></div>
-						    	<a  style= "margin-top: 5px;" >Data fim: ${requisicao.endsAt}</a>
+						    	<div class = "col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+						       		<p class="card-text">${requisicao.description}</p>
+						       	</div>
+						       	<div class = "form-row">
+							       	<div class = "col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style = "text-align: right;  ">
+							    		<a class="card-text" style = "font-weight: bold;">Data início:</a>
+							    		${requisicao.startsAt}
+							    	</div>
+							    	<div class = "col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style = "text-align: left;">
+							    		<a class="card-text" style= "margin-top: 5px; font-weight: bold;">Data fim: </a>
+							    		${requisicao.endsAt}
+							    	</div>
+						    	</div>
+						    	<div class = "col-lg-12" style = "background-color: #DCDCDC ">
+							    	<div class ="form-row">
+							    		<div class = "col-2 col-sm-2 col-lg-2 col-md-3" style = "margin-bottom: 5px;">
+							    			<img src= "${requisicao.user.fotoFacebook}" class ="rounded-circle" style="height: 70px; margin-top: 5px;">
+							    		</div>
+							    		<div class = "col-4 col-sm-4 col-md-4 col-lg-4">
+						    				<p style ="margin-top: 25px">${requisicao.user.name}</p>
+						    			</div>
+								    	<div class = "col-4 col-sm-4 col-md-4 col-lg-4" style = "margin-top: 25px; ">
+								    		<a style= "font-weight: bold;">Avaliação:</a>
+								    		5.0/5.0
+								    	</div>	
+					    			</div>
+				    			</div>
+						    	<div class = "col-md-12 col-lg-12">
+							    	<c:forEach items = "${requisicao.tags}" var= "tag">
+							    		<label style = "color: blue; margin-right: 3px;">#${tag.nome}</label>
+							    	</c:forEach>
+						    	</div>
 					  		</div>
+						</div>	       		
+		        </div>
+		        </div>
+		        <div class ="col-md-2 col-lg-2 col-xl-2"></div>
+			        <form action="${linkHistoricoServlet}" method="get">
+			        	<div class ="form-row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+							<div class ="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style = "text-align: center;">			        
+								<h3 class="mt-4" style="color: gray;">Preencha os dados para fazer uma oferta</h3>
+							</div>
+							<div class="col-md-2 col-lg-2 col-xl-2"></div>
+							<div class="form-group col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+								<label>Valor</label> 
+								<input  class="form-control" name="campoValor">
+							</div>
+							<div class="col-md-2 col-lg-2 col-xl-2"></div>
+							<div class="form-group col-md-2 col-lg-2 col-xl-2"></div>
+							<div class="form-group col-12 col-sm-12 col-md-8 col-lg-8">
+								<label>Observacao</label> 
+								<textarea class="form-control" name="campoObservacao" style="padding-bottom: 50px;"></textarea>
+							</div>
+							<div class="form-group col-md-2 col-lg-2"></div>
+							<div class = "col-12 col-sm-12 col-md-12 col-lg-12" style = "text-align: center; margin-bottom: 10px;">
+								<button class="btn btn-primary center">Enviar</button>
+							</div>
+							<input type = hidden name = "campoId" value = "${requisicao.idRequest }">
+							<input type = hidden name = "Acao" value = "enviarOferta">
 						</div>
-						</div>
-	  </div>
+					</form>
 	</div>
-	<form action="${linkHistoricoServlet}" method="get">
-		<h3 class="mt-4" style="color: gray;text-align: center;">Preencha os dados para fazer uma oferta</h3>
-		<div class="form-group col-md-4"></div>
-		<div class="form-group col-md-4" style="margin: auto;">
-			<label>Valor</label> 
-			<input  class="form-control" name="campoValor">
-		</div>
 
-		<div class="form-group col-md-6"></div>
-		<div class="form-group col-md-4" style="margin: auto;">
-			<label>Observacao</label> 
-			<input class="form-control" name="campoObservacao" style="padding-bottom: 100px;">
-		</div>
-		<div class = "form-grpup col-md-4"></div>
-		<div class = "form-grpup col-md-4" style="margin: auto;">
-			<button class="btn btn-primary center">Enviar</button>
-		</div>
-		<input type = hidden name = "campoId" value = "${requisicao.idRequest }">
-		<input type = hidden name = "Acao" value = "enviarOferta">
-	</form>
 
+	</div>
 	</div>
     <!-- /#page-content-wrapper -->
 
   <!-- /#wrapper -->
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Menu Toggle Script -->
-  <script>
-    $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
-  </script>
-</div>
+	  <script src="vendor/jquery/jquery.min.js"></script>
+	  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+	  <!-- Menu Toggle Script -->
+	  <script>
+	    $("#menu-toggle").click(function(e) {
+	      e.preventDefault();
+	      $("#wrapper").toggleClass("toggled");
+	    });
+	  </script>
+	
 </body>
 
 </html>

@@ -10,9 +10,13 @@ import BD.Conexao;
 import BO.Cidade;
 import BO.Pais;
 import BO.Requisicao;
+import BO.Tag;
 import BO.Uf;
+import BO.User;
 import DAO.enderecoDAO;
 import DAO.requestDAO;
+import DAO.tagDAO;
+import DAO.userDAO;
 
 public class RequisicaoServicos {
 	
@@ -30,6 +34,7 @@ public class RequisicaoServicos {
 		
 		requestDAO rd = new requestDAO(connection);
 		enderecoDAO ed = new enderecoDAO(connection);
+		tagDAO td = new tagDAO(connection);
 		
 		int chave = 0;
 		
@@ -55,6 +60,11 @@ public class RequisicaoServicos {
 			requisicao.getCidade().getUf().getPais().setNomePais(nomePais);
 			
 			chave = rd.insertRequest(requisicao);
+			requisicao.setIdRequest(chave);
+			
+			rd.insertTagRequest(requisicao);
+			
+			
 		} catch (SQLException e) {
 			System.out.println("Não foi possível realizar a consulta");
 			//System.out.println(e.toString());
@@ -64,11 +74,17 @@ public class RequisicaoServicos {
 	}
 
 	//Busca todas as requsições feitas no banco de dados
+	//Saída: Todas as requisições no banco de dados, na entidade "request"
 	public ArrayList<Requisicao> recuperarRequisicao(){
 		Connection connection = Conexao.getConnection();
 		requestDAO rd = new requestDAO(connection);
 		enderecoDAO ed = new enderecoDAO(connection);
+		userDAO ud = new userDAO(connection);
+		tagDAO td = new tagDAO(connection);
 		
+		User user = new User();
+		
+		ArrayList<Tag> tags = new ArrayList<Tag>();
 		ArrayList<Requisicao> requisicoes = new ArrayList<Requisicao>();
 		try {
 			requisicoes = rd.selectRequisicoes();
@@ -86,6 +102,11 @@ public class RequisicaoServicos {
 				uf.setPais(pais);
 				
 				requisicoes.get(i).getCidade().setUf(uf);
+				user = ud.selectUserID(requisicoes.get(i).getIdTuser());
+				requisicoes.get(i).setUser(user);
+				
+				tags = td.selectRequestTagIdRequest(requisicoes.get(i).getIdRequest());
+				requisicoes.get(i).setTags(tags);
 			}
 			
 		} catch (SQLException e) {
@@ -100,10 +121,25 @@ public class RequisicaoServicos {
 		Connection connection = Conexao.getConnection();
 		requestDAO rd = new requestDAO(connection);
 		enderecoDAO ed = new enderecoDAO(connection);
-
+		tagDAO td = new tagDAO(connection);
+		userDAO ud = new userDAO(connection);
+		
+		User user = new User();
+		
 		Requisicao req = new Requisicao(); //Objeto vazio que será populado após as operações abaixo
+		ArrayList<Tag> tags = new ArrayList<Tag>();
 		try {
+			//Busco as requisições associadas ao seu respectivo id no bd
 			req = rd.selectRequisicaoId(id);
+			
+			//Pega as tags daquela requisição e as seta para o objeto request
+			tags = td.selectRequestTagIdRequest(id);
+			req.setTags(tags);
+			
+			//Pega o usuário assciado com aquela requisição
+			user = ud.selectUserID(req.getIdTuser());
+			req.setUser(user);
+			
 			String nomeCidade = ed.selectRetornaString("SELECT name FROM city WHERE id = " + req.getCidade().getIdCidade());
 			req.getCidade().setNome(nomeCidade);
 			
@@ -124,7 +160,8 @@ public class RequisicaoServicos {
 		}
 		return req;
 	}
-
+ 
+	
 	//Busca todas as requisições feitas por um turista por meio do seu id do facebook
 	//Entrada: id do turista
 	//Saída: Todas as requisições feitas pelo turista
@@ -134,11 +171,17 @@ public class RequisicaoServicos {
 		Connection connection = Conexao.getConnection();
 		requestDAO rd = new requestDAO(connection);
 		enderecoDAO ed = new enderecoDAO(connection);
+		tagDAO td = new tagDAO(connection);
 		
 		ArrayList<Requisicao> requisicoes = new ArrayList<Requisicao>();
+		ArrayList<Tag> tags = new ArrayList<Tag>();
 		try {
 			requisicoes = rd.selectHistoricoRequisicaoTurista(idTurista);
 			for(int i = 0; i < requisicoes.size();i++){
+				//Pega as tags daquela requisição e as seta para o objeto request
+				tags = td.selectRequestTagIdRequest(requisicoes.get(i).getIdRequest());
+				requisicoes.get(i).setTags(tags);
+				
 				String nomeCidade = ed.selectRetornaString("SELECT name FROM city WHERE id = " + requisicoes.get(i).getCidade().getIdCidade());
 				requisicoes.get(i).getCidade().setNome(nomeCidade);
 				

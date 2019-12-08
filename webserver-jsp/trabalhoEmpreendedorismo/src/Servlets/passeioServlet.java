@@ -48,11 +48,28 @@ public class passeioServlet extends HttpServlet {
 			String dataFim = request.getParameter("campoDataFim");
 			String complemento = request.getParameter("campoComplemento");
 			String nomeCidade = request.getParameter("campoCidade");
+			
+			int tag1 = Integer.parseInt(request.getParameter("tag1"));
+			int tag2 = Integer.parseInt(request.getParameter("tag2"));
+			int tag3 = Integer.parseInt(request.getParameter("tag3"));
+			
+			System.out.println("TAAAAG: " + tag1);
+			System.out.println("TAAAAG: " + tag2);
+			System.out.println("TAAAAG: " + tag3);
+			
+			Tag tagUm = new Tag(tag1);
+			Tag tagDois = new Tag(tag2);
+			Tag tagTres = new Tag(tag3);
+			
+			ArrayList<Tag> tags = new ArrayList<>();
+			tags.add(tagUm);
+			tags.add(tagDois);
+			tags.add(tagTres);
 			//int idTUser = Integer.parseInt(request.getParameter("idTuser"));
 			int idTUser = user.getUserID();
 			
 			Cidade objCidade = new Cidade(nomeCidade);
-			Requisicao requisicao = new Requisicao(title,descricao,dataInicio,dataFim,complemento,objCidade,idTUser);
+			Requisicao requisicao = new Requisicao(title,descricao,dataInicio,dataFim,complemento,objCidade,idTUser,tags);
 			
 			RequisicaoServicos rc = new RequisicaoServicos();
 			int chave = rc.adicionarRequisicao(requisicao);
@@ -70,9 +87,12 @@ public class passeioServlet extends HttpServlet {
 			User user = (User) request.getSession(false).getAttribute("usuarioLogado");
 			tagServicos ts = new tagServicos();
 			ArrayList<Tag> tags = ts.buscarTags();
-		
+			System.out.println(tags.get(0));
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/fazerRequisicao.jsp"); //para qual jsp vou enviar meu request
     		request.setAttribute("tags", tags); //coloco o atributo (nome da empresa) na requisição
+    		request.setCharacterEncoding("UTF-8");
+    		response.setCharacterEncoding("UTF-8");
     		rd.forward(request, response);  //encaminho para o jsp
 		}
 	}

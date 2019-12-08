@@ -13,6 +13,7 @@ import BO.Requisicao;
 public class requestDAO {
 	private String SQLInsertRequest = "INSERT INTO request (title,description,startsAt,endsAt,minPrice,maxPrice,idTuser,idCity,complement) VALUES (?,?,?,?,?,?,?,?,?)";
 	private String SQLSelectHistoricoRequisicao = "SELECT * FROM request WHERE idTUser = ?";
+	private String SQLInsertTagRequest = "INSERT INTO requesttag (idRequest,idTag) VALUES (?,?)";
 	
 	private Connection connection;
 	
@@ -141,5 +142,18 @@ public class requestDAO {
 				requisicoes.add(req);
 		}		
 		return requisicoes;
+	}
+	
+	//Insere as tags associadas 
+	public void insertTagRequest(Requisicao req) throws SQLException{
+		PreparedStatement ps = connection.prepareStatement(SQLInsertTagRequest,Statement.RETURN_GENERATED_KEYS);
+		
+		//pego o Id de cada para inserir na entidade requestTag
+		for(int i = 0;i <req.getTags().size();i++){
+			ps.setInt(1, req.getIdRequest());
+			ps.setInt(2, req.getTags().get(i).getId());
+			ps.execute();
+		}
+		
 	}
 }

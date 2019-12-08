@@ -35,83 +35,67 @@
 
 <body >
   <div class="d-flex" id="wrapper">
-    <!-- Sidebar -->
-    <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Menu </div>
-      <div class="list-group list-group-flush">
-      	    <a href="fazerRequisicao.jsp" class="list-group-item list-group-item-action bg-light">Solicitar Tour</a>
-		    <a href="historicoTours.jsp" class="list-group-item list-group-item-action bg-light">Histórico de Tours</a>
-		    <a href="#" class="list-group-item list-group-item-action bg-light">Tour em progresso</a>
-			<a href="#" class="list-group-item list-group-item-action bg-light">Chat</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Sair</a>
-	  </div>
-    </div>
-    
-    <!-- /#sidebar-wrapper -->
+      <%@ include file = "menu.jsp" %>
+	    <div id="page-content-wrapper">
+	<%@ include file = "restoHeader.jsp" %>
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-
-      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <button class="btn btn-primary" id="menu-toggle">Esconder Menu</button>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-              <a class="nav-link" href="#"> <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"></a>
-            </li>
-            <!--  
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              	<a class="dropdown-item" href="#"></a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#"></a>
-              </div>
-            </li>
-            -->
-          </ul>
-        </div>
-      </nav>
 
       <div class="container-fluid">
       <div class = "form-row">
       <!--<a style = "margin-left: 100px;"href="<c:url value='/ofertaServlet' />">Click here</a> -->
-      <div class = "form-group col-md-4"></div>
-      <h2 class="h2"style = "padding-right: 80px;">Escolher requisição de passeio</h2>
-      <div class ="form-group col-md-4"></div>
-      	<form action="${linkOfertaServlet}" method = get>
-      		<button type = "submit" class ="btn btn-primary" style="margin-left: 130px; margin-bottom: 30px;">Buscar Requisições</button>
-      		<input type = "hidden" name = "Acao" value ="buscarRequisicoes">
+      <div class = "form-group col-sm-12 col-md-12 col-lg-12" style="text-align: center;">
+          <h2 class="h2">Escolher requisição de passeio</h2>
+      </div>
+      <div class = "form-group col-sm-12 col-md-12 col-lg-12" style="text-align: center;">
+          <form action="${linkOfertaServlet}" method = get>
+      	      <button type = "submit" class ="btn btn-primary" style="margin-bottom: 30px;">Buscar Requisições</button>
+      		  <input type = "hidden" name = "Acao" value ="buscarRequisicoes">
       	</form>
-      	<div class = "form-group col-md-2"></div>
+      	</div>
       	<c:forEach items="${requisicoes}" var = "requisicao">
-		    	<div class = "form-group col-md-4">
+		    	<div class = "form-group col-md-6 col-lg-6" style = "text-align: center;">
 		        	<form action ="${linkOfertaServlet}" method ="get">
-		        		<div class="card" style="width: 18rem;margin-left:60px;">
+		        		<div class="card">
 					  		<div class="card-body">
 						    	<h5 class="card-title">${requisicao.title}</h5>
-						       	<p class="card-text">${requisicao.description}</p>
-						    	<a class="card-text">Data início: ${requisicao.startsAt}</a>
-						    	<div class = "form-group cold-md-2"></div>
-						    	<a  style= "margin-top: 5px;" >Data fim: ${requisicao.endsAt}</a>
-						    	<button class ="btn btn-link" type = "submit" style="margin-left: 90px;">Ver</button>
-						    	<input type = "hidden" name = "Acao" value = "fazerOferta">
+						    	<div class = "col-12 col-sm-12 col-md-12 col-lg-12">
+						       		<p class="card-text">${requisicao.description}</p>
+						       	</div>
+						       	<div class = "form-row">
+							       	<div class = "col-6 col-sm-6 col-md-6 col-lg-6" style = "text-align: right;  ">
+							    		<a class="card-text" style = "font-weight: bold;">Data início:</a>
+							    		${requisicao.startsAt}
+							    	</div>
+							    	<div class = "col-6 col-sm-6 col-md-6 col-lg-6" style = "text-align: left;">
+							    		<a class="card-text" style= "margin-top: 5px; font-weight: bold;">Data fim: </a>
+							    		${requisicao.endsAt}
+							    	</div>
+						    	</div>
+						    	<div class = "col-lg-12" style = "background-color: #DCDCDC ">
+							    	<div class ="form-row">
+							    		<div class = "col-2 col-sm-2 col-lg-2 col-md-2" style = "margin-bottom: 5px;">
+							    			<img src= "${requisicao.user.fotoFacebook}" class ="rounded-circle" style="height: 70px; margin-top: 5px;">
+							    		</div>
+							    		<div class = "col-4 col-sm-4 col-md-4 col-lg-4">
+						    				<p style ="margin-top: 25px">${requisicao.user.name}</p>
+						    			</div>
+								    	<div class = "col-4 col-sm-4 col-md-4 col-lg-4" style = "margin-top: 25px; ">
+								    		<a style= "font-weight: bold;">Avaliação:</a>
+								    		5.0/5.0
+								    	</div>	
+					    			</div>
+				    			</div>
+						    	<div class = "col-md-12 col-lg-12">
+							    	<c:forEach items = "${requisicao.tags}" var= "tag">
+							    		<label style = "color: blue; margin-right: 3px;">#${tag.nome}</label>
+							    	</c:forEach>
+						    	</div>
+						    	<button class ="btn btn-link" type = "submit">Ver</button>
+						    	<input type = "hidden" name = "Acao" value = "selecionarRequisicao">
 						    	<input name = "campoId" value="${requisicao.idRequest}" type = "hidden">
-						    	<!--<a href="/trabalhoEmpreendedorismo/fazerOferta.jsp">Ver</a>-->
-						    	<!-- <input name = "campoId">${requisicao.idRequest} -->
 					  		</div>
 						</div>	
-						<div class = "form-group col-md-4"></div>       
+						       
 		        	</form>		
 		        </div>
 		 </c:forEach>

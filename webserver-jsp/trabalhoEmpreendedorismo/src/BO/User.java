@@ -1,5 +1,7 @@
 package BO;
 
+import java.util.ArrayList;
+
 public class User {
 	private String email;
 	private String name;
@@ -16,6 +18,7 @@ public class User {
 	private int isGuide;
 	private int isTourist;
 	
+
 	public User(){
 		
 	}
@@ -60,7 +63,6 @@ public class User {
 		this.numeroTelefone = numeroTelefone;
 	}
 
-	
 	public User(String email, String name, String hash, int userID) {
 		this.email = email;
 		this.name = name;

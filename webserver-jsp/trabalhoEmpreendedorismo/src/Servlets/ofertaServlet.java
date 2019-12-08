@@ -39,7 +39,7 @@ public class ofertaServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String paramAcao = request.getParameter("Acao");
 		//System.out.println("ParamAcaaaaaaoo: " + paramAcao);
-		System.out.println("Servlet chamado");
+		System.out.println("OfertaServlet chamado");
 		//Essa sessão foi criado no servlet de login
 		HttpSession sessao = request.getSession(false); 
 		
@@ -58,16 +58,16 @@ public class ofertaServlet extends HttpServlet {
 			
 			//System.out.println(requisicoes.get(0)); //para ver se está funcionando
 			
-			
 			}
-		else if(paramAcao.equals("fazerOferta")){
+		else if(paramAcao.equals("selecionarRequisicao")){
+			System.out.println("Selecionado a Oferta...");
 			RequisicaoServicos rs = new RequisicaoServicos();
 			Requisicao requisicao = new Requisicao();
 			
 			int id = Integer.parseInt(request.getParameter("campoId"));
 			requisicao = rs.recuprerRequisicaoId(id);
 			System.out.println("Oferta será feita para: " + id);
-			
+			//System.out.println("NOME DO USUARIO: " + requisicao.getUser().getName());
 			RequestDispatcher rd = request.getRequestDispatcher("fazerOferta.jsp"); //para qual jsp vou enviar meu request
 			request.setAttribute("requisicao", requisicao); //coloco o atributo (nome da empresa) na requisição
 			rd.forward(request, response);  //encaminho para o jsp
@@ -88,11 +88,10 @@ public class ofertaServlet extends HttpServlet {
 			os.enviarOferta(oferta);
 		}
 		else if(paramAcao.equals("buscarOfertas")){
-			System.out.println("Buscando ofertas");
+			System.out.println("Buscando ofertas...");
 			ArrayList<Oferta> ofertas;
 			Requisicao requisicao;
 			int idRequisicao = Integer.parseInt(request.getParameter("campoIdRequisicao"));
-			
 			
 			ofertaServicos os = new ofertaServicos();
 			RequisicaoServicos rs = new RequisicaoServicos();
@@ -100,6 +99,7 @@ public class ofertaServlet extends HttpServlet {
 			ofertas = os.buscarOferta(idRequisicao);
 			requisicao = rs.recuprerRequisicaoId(idRequisicao);
 			System.out.println(ofertas);
+			//System.out.println("TAGSON: " + requisicao.getTags().get(0));
 			//System.out.println();
 			RequestDispatcher rd = request.getRequestDispatcher("ofertas.jsp"); //para qual jsp vou enviar meu request
 			request.setAttribute("ofertas", ofertas); //coloco o atributo (nome da empresa) na requisição

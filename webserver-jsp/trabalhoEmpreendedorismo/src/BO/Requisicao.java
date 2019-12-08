@@ -1,5 +1,7 @@
 package BO;
 
+import java.util.ArrayList;
+
 public class Requisicao {
 	private String title;
 	private String description;
@@ -12,6 +14,8 @@ public class Requisicao {
 	private int idRequest;
 	private String complement;
 	private Cidade cidade;
+	private ArrayList<Tag> tags;
+	private User user;
 	
 
 	public Requisicao(){
@@ -45,20 +49,38 @@ public class Requisicao {
 		this.maxPrice = 0;
 	}
 
-	public Requisicao(String title, String description, String startsAt, String endsAt,String complement,Cidade cidade, int idTUser) {
+	public Requisicao(String title, String description, String startsAt, String endsAt,String complement,Cidade cidade, int idTUser,ArrayList<Tag> tags) {
 		this.title = title;
 		this.description = description;
 		this.startsAt = startsAt;
 		this.endsAt = endsAt;
 		this.complement = complement;
 		this.cidade = cidade;
+		this.tags = tags;
 		
 		this.idTuser = idTUser;
 		this.minPrice = 0;
 		this.maxPrice = 0;
+		
 	}
 
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public ArrayList<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(ArrayList<Tag> tags) {
+		this.tags = tags;
+	}
+
 	public Cidade getCidade() {
 		return cidade;
 	}

@@ -43,7 +43,9 @@ public class historicoServlet extends HttpServlet {
 			ArrayList<Requisicao> requisicoes = new ArrayList<>();
 			System.out.println(user);
 			
+			
 			requisicoes = rs.recuperarHistoricoRequisicao(user.getUserID());
+			System.out.println(requisicoes.get(0));
 			
 			RequestDispatcher rd = request.getRequestDispatcher("historicoTours.jsp"); //para qual jsp vou enviar meu request
 	    	request.setAttribute("requisicoes", requisicoes); //coloco o atributo na requisição

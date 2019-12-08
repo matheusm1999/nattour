@@ -16,7 +16,7 @@ public class userDAO {
 	
 	private String SQLInsertUser = "INSERT INTO USER (email,name,hash,salt,idTRating,idGRating,idCity,isGuide,isTourist,docValue,docType,idFacebook,fotoFacebook,ddi,ddd,numeroTelefone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private String SQLSelectUserIDFacebook = "SELECT * FROM user where idFacebook = ?";
-	private String SQLUpdateUserIsGuia = "UPDATE user SET isGuide = 1, ddd = ?, ddi = ?, numeroTelefone = ? WHERE id = ?";
+	private String SQLUpdateUserIsGuia = "UPDATE user SET isGuide = 1,isTourist = 0 ,ddd = ?, ddi = ?, numeroTelefone = ? WHERE id = ?";
 	private String SQLSelectUserID = "SELECT * FROM user WHERE id = ?";
 	private Connection connection;
 	
