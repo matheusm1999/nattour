@@ -38,16 +38,21 @@ public class passeioServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String paramAcao = request.getParameter("acao");
 		System.out.println("ParamAcao  "  + paramAcao);
+		User user = (User) request.getSession(false).getAttribute("usuarioLogado");
 		if(paramAcao.equals("cadastrarRequest")){
 			System.out.println("Cadastrando request...");
 			
-			User user = (User) request.getSession(false).getAttribute("usuarioLogado");
 			String title = request.getParameter("campoTitulo");
 			String descricao = request.getParameter("campoDescricao");
 			String dataInicio = request.getParameter("campoDataInicio");
 			String dataFim = request.getParameter("campoDataFim");
+			String horarioInicio = request.getParameter("campoHorarioInicio");
+			String horarioFim = request.getParameter("campoHorarioFim");
 			String complemento = request.getParameter("campoComplemento");
 			String nomeCidade = request.getParameter("campoCidade");
+			
+			dataInicio = dataInicio + " " + horarioInicio;
+			dataInicio = dataFim + " " + horarioFim;
 			
 			int tag1 = Integer.parseInt(request.getParameter("tag1"));
 			int tag2 = Integer.parseInt(request.getParameter("tag2"));
@@ -76,15 +81,16 @@ public class passeioServlet extends HttpServlet {
 			
 			requisicao.setIdRequest(chave);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/ofertas.jsp"); //para qual jsp vou enviar meu request
-    		request.setAttribute("requisicao", requisicao); //coloco o atributo (nome da empresa) na requisição
+			RequestDispatcher rd = request.getRequestDispatcher("/ofertaServlet?Acao=buscarOfertas&campoIdRequisicao=" + chave); //para qual jsp vou enviar meu request
+			request.setAttribute("usuarioLogado", user);
+			request.setAttribute("requisicao", requisicao); //coloco o atributo (nome da empresa) na requisição
     		rd.forward(request, response);  //encaminho para o jsp
 			//response.sendRedirect("/trabalhoEmpreendedorismo/ofertas.jsp");
 			
 		}
 		if(paramAcao.equals("inicio")){
 			System.out.println("Buscando tags e cidades...");
-			User user = (User) request.getSession(false).getAttribute("usuarioLogado");
+			user = (User) request.getSession(false).getAttribute("usuarioLogado");
 			tagServicos ts = new tagServicos();
 			ArrayList<Tag> tags = ts.buscarTags();
 			System.out.println(tags.get(0));
@@ -93,6 +99,7 @@ public class passeioServlet extends HttpServlet {
     		request.setAttribute("tags", tags); //coloco o atributo (nome da empresa) na requisição
     		request.setCharacterEncoding("UTF-8");
     		response.setCharacterEncoding("UTF-8");
+    		request.setAttribute("usuarioLogado", user);
     		rd.forward(request, response);  //encaminho para o jsp
 		}
 	}

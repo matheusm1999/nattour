@@ -66,7 +66,17 @@
 	        	<input class ="form-control" name ="campoDataFim" type="date" style = "padding-right: 15px;">
 	        </div>
 	        <div class = " col-md-2 col-lg-2"></div> 
-	        <div class = " col-md-2 col-lg-2"></div> 
+	        <div class = " col-md-2 col-lg-2"></div>
+	        <div class = "col-sm-6 col-md-4 col-lg-4" style="margin-top: 15px;"> 
+	        		<label>Horário Início</label>
+	        	    <input input type = "time" class ="form-control" name ="campoHorarioInicio" type="date" style = "padding-right: 15px;" >
+	        </div>
+	        <div class = "col-sm-6 col-md-4 col-lg-4" style="margin-top: 15px;">
+	        	<label>Horário Fim</label> 
+	        	<input type = "time" class ="form-control" name ="campoHorarioFim" type="date" style = "padding-right: 15px;">
+	        </div>
+	        <div class = "col-md-2 col-lg-2"> </div>
+	        <div class = "col-md-2 col-lg-2"> </div> 
 	        <div class = "col-sm-4 col-md-2 col-lg-2" style="margin-top: 15px;">
 	        	<label>País</label> 
 	        	<select class ="form-control" name ="campoPais" >

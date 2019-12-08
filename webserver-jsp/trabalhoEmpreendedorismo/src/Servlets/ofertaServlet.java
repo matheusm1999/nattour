@@ -42,8 +42,8 @@ public class ofertaServlet extends HttpServlet {
 		System.out.println("OfertaServlet chamado");
 		//Essa sessão foi criado no servlet de login
 		HttpSession sessao = request.getSession(false); 
-		
 		User user = (User) sessao.getAttribute("usuarioLogado");
+		
 		if(paramAcao.equals("buscarRequisicoes")){
 			System.out.println("Buscando requisiçoes");
 			//ofertaServicos os = new ofertaServicos();
@@ -54,6 +54,7 @@ public class ofertaServlet extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("selecionarRequisicao.jsp"); //para qual jsp vou enviar meu request
 			request.setAttribute("requisicoes", requisicoes); //coloco o atributo (nome da empresa) na requisição
+			request.setAttribute("usuarioLogado", user);
 			rd.forward(request, response);  //encaminho para o jsp
 			
 			//System.out.println(requisicoes.get(0)); //para ver se está funcionando
@@ -70,6 +71,7 @@ public class ofertaServlet extends HttpServlet {
 			//System.out.println("NOME DO USUARIO: " + requisicao.getUser().getName());
 			RequestDispatcher rd = request.getRequestDispatcher("fazerOferta.jsp"); //para qual jsp vou enviar meu request
 			request.setAttribute("requisicao", requisicao); //coloco o atributo (nome da empresa) na requisição
+			request.setAttribute("usuarioLogado", user);
 			rd.forward(request, response);  //encaminho para o jsp
 			
 		}
@@ -86,6 +88,11 @@ public class ofertaServlet extends HttpServlet {
 			oferta.setIdGUser(idGUser);
 			ofertaServicos os = new ofertaServicos();
 			os.enviarOferta(oferta);
+			RequestDispatcher rd = request.getRequestDispatcher("/ofertaServlet?Acao=buscarOfertas&campoIdRequisicao=" + idRequest); //para qual jsp vou enviar meu request
+			request.setAttribute("usuarioLogado", user);
+    		rd.forward(request, response);  //encaminho para o jsp
+
+
 		}
 		else if(paramAcao.equals("buscarOfertas")){
 			System.out.println("Buscando ofertas...");
@@ -104,6 +111,7 @@ public class ofertaServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("ofertas.jsp"); //para qual jsp vou enviar meu request
 			request.setAttribute("ofertas", ofertas); //coloco o atributo (nome da empresa) na requisição
 			request.setAttribute("requisicao", requisicao);
+			request.setAttribute("usuarioLogado", user);
 			rd.forward(request, response);  //encaminho para o jsp
 			
 		}
@@ -114,6 +122,7 @@ public class ofertaServlet extends HttpServlet {
 			System.out.println(oferta);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("verOferta.jsp"); //para qual jsp vou enviar meu request
+			request.setAttribute("usuarioLogado", user);
 			request.setAttribute("oferta", oferta); //coloco o atributo (nome da empresa) na requisição
 			rd.forward(request, response);  //encaminho para o jsp
 			/*

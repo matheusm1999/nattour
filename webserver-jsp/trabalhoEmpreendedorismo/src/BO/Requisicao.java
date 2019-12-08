@@ -16,7 +16,9 @@ public class Requisicao {
 	private Cidade cidade;
 	private ArrayList<Tag> tags;
 	private User user;
+	private String horarioInicio;
 	
+	private String horarioFim;
 
 	public Requisicao(){
 		
@@ -62,6 +64,23 @@ public class Requisicao {
 		this.minPrice = 0;
 		this.maxPrice = 0;
 		
+	}
+
+
+	public String getHorarioInicio() {
+		return horarioInicio;
+	}
+
+	public void setHorarioInicio(String horarioInicio) {
+		this.horarioInicio = horarioInicio;
+	}
+
+	public String getHorarioFim() {
+		return horarioFim;
+	}
+
+	public void setHorarioFim(String horarioFim) {
+		this.horarioFim = horarioFim;
 	}
 
 	

@@ -63,7 +63,7 @@ public class loginServlet extends HttpServlet {
 	    	}
 	    		 else if(user.getIsGuide() == 0){
 	    			 System.out.println("O usuário é um turista!");
-	    			 rd = request.getRequestDispatcher("fazerRequisicao.jsp"); //para qual jsp vou enviar meu request
+	    			 rd = request.getRequestDispatcher("passeioServlet?acao=inicio"); //para qual jsp vou enviar meu request
 	    		 }
 	    	rd.forward(request, response);  //encaminho para o jsp
 			

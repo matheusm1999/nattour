@@ -14,6 +14,7 @@ public class requestDAO {
 	private String SQLInsertRequest = "INSERT INTO request (title,description,startsAt,endsAt,minPrice,maxPrice,idTuser,idCity,complement) VALUES (?,?,?,?,?,?,?,?,?)";
 	private String SQLSelectHistoricoRequisicao = "SELECT * FROM request WHERE idTUser = ?";
 	private String SQLInsertTagRequest = "INSERT INTO requesttag (idRequest,idTag) VALUES (?,?)";
+	//private String SQLSelectOfferIdGuia =
 	
 	private Connection connection;
 	
@@ -73,6 +74,19 @@ public class requestDAO {
 			int idCity = rs.getInt("idCity");
 			String complement = rs.getString("complement");
 			
+			PreparedStatement pss = connection.prepareStatement("SELECT DATE_FORMAT(?, '%Y/%m/%d %H:%i')");
+			pss.setString(1, startsAt);
+			ResultSet rss = pss.executeQuery();
+			rss.next();
+			startsAt = rss.getString(1);
+			System.out.println("COMEÇA EMmmmmmm : " + startsAt);
+			
+			PreparedStatement psss = connection.prepareStatement("SELECT DATE_FORMAT(?, '%Y/%m/%d %H:%i')");
+			pss.setString(1, startsAt);
+			ResultSet rsss = pss.executeQuery();
+			rsss.next();
+			endsAt = rsss.getString(1);
+			System.out.println("COMEÇA EMmmmmmm : " + endsAt);
 			//Criando os os objetos
 			Cidade cidade = new Cidade(idCity);
 			Requisicao req = new Requisicao(id,title,description,startsAt,endsAt,complement,cidade,idTUser);
@@ -105,8 +119,22 @@ public class requestDAO {
 		int idTUser = rs.getInt("idTUser");
 		int idCity = rs.getInt("idCity");
 		String complement = rs.getString("complement");
+		
+		PreparedStatement pss = connection.prepareStatement("SELECT DATE_FORMAT(?, '%Y/%m/%d %H:%i')");
+		pss.setString(1, startsAt);
+		ResultSet rss = pss.executeQuery();
+		rss.next();
+		startsAt = rss.getString(1);
+		System.out.println("COMEÇA EMmmmmmm : " + startsAt);
+		
+		PreparedStatement psss = connection.prepareStatement("SELECT DATE_FORMAT(?, '%Y/%m/%d %H:%i')");
+		pss.setString(1, startsAt);
+		ResultSet rsss = pss.executeQuery();
+		rsss.next();
+		endsAt = rsss.getString(1);
+		System.out.println("COMEÇA EMmmmmmm : " + endsAt);
 			
-			//Criando os os objetos
+		//Criando os os objetos
 		Cidade cidade = new Cidade(idCity);
 		Requisicao req = new Requisicao(id,title,description,startsAt,endsAt,complement,cidade,idTUser);
 		
@@ -135,6 +163,20 @@ public class requestDAO {
 				int idTUser = rs.getInt("idTUser");
 				int idCity = rs.getInt("idCity");
 				String complement = rs.getString("complement");
+				
+				PreparedStatement pss = connection.prepareStatement("SELECT DATE_FORMAT(?, '%Y/%m/%d %H:%i')");
+				pss.setString(1, startsAt);
+				ResultSet rss = pss.executeQuery();
+				rss.next();
+				startsAt = rss.getString(1);
+				System.out.println("COMEÇA EMmmmmmm : " + startsAt);
+				
+				PreparedStatement psss = connection.prepareStatement("SELECT DATE_FORMAT(?, '%Y/%m/%d %H:%i')");
+				pss.setString(1, startsAt);
+				ResultSet rsss = pss.executeQuery();
+				rsss.next();
+				endsAt = rsss.getString(1);
+				System.out.println("COMEÇA EMmmmmmm : " + endsAt);
 					
 				//Criando os os objetos
 				Cidade cidade = new Cidade(idCity);

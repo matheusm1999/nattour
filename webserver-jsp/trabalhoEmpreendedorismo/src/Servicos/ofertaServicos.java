@@ -39,6 +39,7 @@ public class ofertaServicos {
 			e.printStackTrace();
 		}
 	}
+		
 	
 	//Busca todas as ofertas de requisições no banco de dados
 	public ArrayList<Oferta> buscarOferta(int idRequisicao){

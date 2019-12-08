@@ -12,6 +12,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
 <style>		
    .botao{
    padding:5x;
@@ -31,6 +33,9 @@
 </head>
 
 <body >
+	<script
+    src="https://www.paypal.com/sdk/js?client-id=Ac5nd7i49F3jj1T-Is8JdAmERsnsly6sU8sAIxRJrj2jsjEntiM-R9D_ffiEyIBbk6rPh_fQxSmz7Pja"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+  </script>
 
   <div class="d-flex" id="wrapper">
 
@@ -115,6 +120,7 @@
 							    	</div>
 							    	<div class = "col-6 col-sm-6 col-md-6 col-lg-6" style = "text-align: right;">
 							    		<button class ="btn btn-primary" type = "submit" style = "margin-top: 10px;">Aceitar</button>
+							    		<div id="paypal-button-container"></div>
 							    	</div>
 							    	<div class = "col-6 col-sm-6 col-md-6 col-lg-6" style = "text-align: left;">
 							    		<button class ="btn btn-danger" type = "submit" style = "margin-top: 10px;">Recusar</button>
@@ -136,6 +142,33 @@
   <!-- /#wrapper -->
 
   <!-- Bootstrap core JavaScript -->
+   <script>
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      // This function sets up the details of the transaction, including the amount and line item details.
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '10.00',
+            currency: 'USD'    
+          },
+          payee: {
+              email_address: 'payee@gmail.com'
+          }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      // This function captures the funds from the transaction.
+      return actions.order.capture().then(function(details) {
+        // This function shows a transaction success message to your buyer.
+        alert('Transaction completed by ' + details.payer.name.given_name);
+      });
+    }
+  }).render('#paypal-button-container');
+  //This function displays Smart Payment Buttons on your web page.
+</script>
+  
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -148,5 +181,7 @@
   </script>
 
 </body>
+
+ 
 
 </html>
