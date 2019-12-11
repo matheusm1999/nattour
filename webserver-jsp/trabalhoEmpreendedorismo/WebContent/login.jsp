@@ -31,11 +31,11 @@
 
 </head>
 
-<body >
+<body > 
+<!-- style = "background-image: url(https://images.unsplash.com/photo-1541343672885-9be56236302a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60.png); height: 100%; background-repeat: no-repeat; background-position: center; background-size : cover;"> -->
 
 
   <div class="d-flex" id="wrapper">
-
     <!-- Sidebar 
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="sidebar-heading">Menu </div>
@@ -85,43 +85,29 @@
 	--->
 	
       <div class="container-fluid">
-        <h1 class="mt-4" style = "text-align: center;">Login</h1>
-         <!-- <form action ="${linkLoginServlet}" method ="get"> -->
-         <form  method="post">
-    	
+      
+		<div class = "col-lg-12 col-md-12 col-sm-12" style = "text-align: center;">      
+        	<h1 class="mt-4">Nattour</h1>
+        </div>
+         
 	<br><br>
 	<div id="status">
-	</div> 
-        	<div class = "form-row">
-        		<div class = "form-group col-md-4"> </div>
-	        	<div class = "form-group col-md-4">
-	        		<label>Login</label> 
-	        		<input class ="form-control" id = "campoLogin" name ="campoLogin">
+	</div>
+        	 <img src=" " class = "img-fluid"> 
+        		<div class = "form-group col-sm-12 col-md-12 col-lg-12" style = "text-align: center;"> 
+	        		<button id = "custom-login-button" class = "btn btn-dark">Login com Facebook</button>
 	        	</div>
-		        <div class = "form-group col-md-4"> </div>
-		        <div class = "form-group col-md-4"> </div>
-		        <div class = "form-group col-md-4">
-	        		<label>Senha</label> 
-	        	    <input id = "campoSenha" class ="form-control" name ="campoSenha">
+	        		<input type = "hidden" class ="form-control" id = "campoLogin" name ="campoLogin">	 
+	        	    <input type = "hidden" id = "campoSenha" class ="form-control" name ="campoSenha">
 	        		<input id = "campoFoto" name = "campoFoto" type = "hidden">
 	        		<input id = "campoEmail" name = "campoSenha" type = "hidden">
 	        </div>
-	        <div class = "form-group col-md-4"></div>
-	        <div class = "form-group col-md-4"></div>
-	        
+	        </div>
 	        <!-- <fb:login-button size="large" scope="public_profile,email" returnscopes="true" onlogin="getLoginState();">Login to Facebook</fb:login-button> -->
 	        	        	  
 	        
 	        <input type = hidden name = "Acao" value = "logar">
-	        <a href= "/trabalhoEmpreendedorismo/index.jsp"><button class="button" type ="submit" >Entrar</button></a>	        	    
-	        <a href= "/trabalhoEmpreendedorismo/cadastro.jsp" style="padding-left: 30px;">Criar uma conta</a>
-	        
-	        </div>
-        	</form> 		
-        <button id = "custom-login-button">Login com Facebook</button>
-        </div>
-     </div>
-	    </div>
+	        </div> 		
     <!-- /#page-content-wrapper -->
 
   <!-- /#wrapper -->
@@ -188,7 +174,7 @@ function statusChangeCallback(response){
 				var id = document.getElementById('campoLogin').value;
 				var image = "http://graph.facebook.com/" + response.id + "/picture?type=normal"
 				document.getElementById('campoFoto').value = image;
-				document.getElementById('status').innerHTML = "<img src= " + image + ">";
+				//document.getElementById('status').innerHTML = "<img src= " + image + ">";
 				location.replace("https://66691ce5.ngrok.io/trabalhoEmpreendedorismo/loginServlet?Acao=loginFB&campoNome="+response.name+"&campoID=" + id + "&campoFoto=" + image+"&campoEmail=" + response.email);
 				//document.getElementById('status').innerHTML = response.authResponse.userID;
 				});	

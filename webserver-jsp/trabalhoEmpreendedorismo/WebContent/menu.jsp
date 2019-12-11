@@ -3,8 +3,9 @@
 	<c:redirect url="/login.jsp"/>
 </c:if> 	
     <div class="bg-light border-right" id="sidebar-wrapper">
+      <img src= "${usuarioLogado.fotoFacebook}" class ="rounded-circle">
+      ${usuarioLogado.name}
       <div class="sidebar-heading">Menu </div>
-      <img src= "${usuarioLogado.fotoFacebook}">
       <div class="list-group list-group-flush">
       <c:if test="${usuarioLogado.isTourist == 1}">
       	    <a href="passeioServlet?acao=inicio" class="list-group-item list-group-item-action bg-light">Solicitar Tour</a>

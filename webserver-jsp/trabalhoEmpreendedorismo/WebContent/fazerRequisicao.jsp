@@ -91,25 +91,22 @@
 	        <div class = "col-sm-4 col-md-2 col-lg-2" style="margin-top: 15px;">
 	        	<label>País</label> 
 	        	<select class ="form-control" name ="campoPais" >
-		        	<option>Brasil</option>
-		        	<option>Estados Unidos</option>
-		        	<option>Canada</option>
+		        	<option value = "Brasil">Brasil</option>
 	        	</select>
 	        </div>
 	        <div class = "col-sm-4 col-md-3 col-lg-3" style="margin-top: 15px;">
 	        	<label>Estado</label> 
 	        	<select class ="form-control" name ="campoEstado">
-	        		<option>Parana</option>
-	        		<option>Nova York</option>
-	        		<option>Quebec</option>
+	        		<option value = "Parana">Paraná</option>
 	        	</select>
 	        </div>
 	        <div class = "col-sm-4 col-md-3 col-lg-3" style="margin-top: 15px;">
 	        	<label>Cidade</label> 
 	        	<select class="form-control" name ="campoCidade" > 
-	        		<option value= "Foz do Iguacu">Foz do Iguacu</option>
-	        		<option value = "Nova York">Nova York</option>
-	        		<option value = "Quebec">Quebec</option>
+	        		<option value= "Foz do Iguacu">Foz do Iguaçu</option>
+	        		<option value = "Curitiba">Curitiba</option>
+	        		<option value = "Pato Branco">Pato Branco</option>
+	        		<option value = "Londrina">Londrina</option>
 	        	</select>
 	        </div>
 	        <div class = "col-md-2 col-lg-2"></div>
