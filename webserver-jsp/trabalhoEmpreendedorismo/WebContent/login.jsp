@@ -31,7 +31,7 @@
 
 </head>
 
-<body > 
+<body style = "background-image: url(https://images.unsplash.com/photo-1511576661531-b34d7da5d0bb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80)"> 
 <!-- style = "background-image: url(https://images.unsplash.com/photo-1541343672885-9be56236302a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60.png); height: 100%; background-repeat: no-repeat; background-position: center; background-size : cover;"> -->
 
 
@@ -95,7 +95,7 @@
 	</div>
         	 <img src=" " class = "img-fluid"> 
         		<div class = "form-group col-sm-12 col-md-12 col-lg-12" style = "text-align: center;"> 
-	        		<button id = "custom-login-button" class = "btn btn-dark">Login com Facebook</button>
+	        		<button id = "custom-login-button" class = "btn btn-dark" style = "margin-top: 80px;">Login com Facebook</button>
 	        	</div>
 	        		<input type = "hidden" class ="form-control" id = "campoLogin" name ="campoLogin">	 
 	        	    <input type = "hidden" id = "campoSenha" class ="form-control" name ="campoSenha">

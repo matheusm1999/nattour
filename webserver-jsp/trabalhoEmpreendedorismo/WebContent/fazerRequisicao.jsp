@@ -47,6 +47,7 @@
 				 <li>Data de Início ou Fim são maiores ou menores que o dia atual</li>
 				 <li>Horário de Início e ou Fim são menores que o horário atual </li>
 				 <li>Passeio tem mais de 4 horas de duração</li>
+				 <li>Tour já foi solicitado</li>
 			</ul>
 		</div>
       </c:if>
