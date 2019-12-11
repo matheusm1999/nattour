@@ -14,6 +14,7 @@ import BO.Tag;
 import BO.Uf;
 import BO.User;
 import DAO.enderecoDAO;
+import DAO.ofertaDAO;
 import DAO.requestDAO;
 import DAO.tagDAO;
 import DAO.userDAO;
@@ -29,15 +30,25 @@ public class RequisicaoServicos {
 	//Saída: Chave gerado após o registro ter sido inserido
 	//Pré condição: Nenhuma
 	//Pós condição: Requisição adicionada no banco de dados
-	public int adicionarRequisicao(Requisicao requisicao){
+	public int adicionarRequisicao(Requisicao requisicao,int idTurista){
 		Connection connection = Conexao.getConnection();
 		
 		requestDAO rd = new requestDAO(connection);
 		enderecoDAO ed = new enderecoDAO(connection);
 		tagDAO td = new tagDAO(connection);
 		
-		int chave = 0;
+		ArrayList<Requisicao> reqs = recuperarHistoricoRequisicao(idTurista);
+		for(int j = 0 ;j < reqs.size(); j++){
+			if(reqs.get(j).getIsPago() == 0){
+				System.out.println("Não pode cadastrar requisição pq já existe uma req feita!!");
+				return 0;
+			}
+				
+		}
 		
+		
+		int chave = 0;
+		System.out.println("DENTRO DO ADICIONAR: DT FINAL = " + requisicao.getEndsAt());
 		try {
 			//Recuperando a cidade no banco de dados
 			System.out.println("Cidade: " + requisicao.getCidade().getNome());
@@ -136,7 +147,7 @@ public class RequisicaoServicos {
 			tags = td.selectRequestTagIdRequest(id);
 			req.setTags(tags);
 			
-			//Pega o usuário assciado com aquela requisição
+			//Pega o usuário associado com aquela requisição
 			user = ud.selectUserID(req.getIdTuser());
 			req.setUser(user);
 			
@@ -202,6 +213,51 @@ public class RequisicaoServicos {
 			e.printStackTrace();
 		}
 		return requisicoes;
+	}
+
+
+	//Recupera todas as requisições nas quais o guia fez uma requisição
+	public ArrayList<Requisicao> recuperarRequiscaoOfertaFeitaGuia(int idGuia){
+		Connection connection = Conexao.getConnection();
+		requestDAO rd = new requestDAO(connection);
+		enderecoDAO ed = new enderecoDAO(connection);
+		tagDAO td = new tagDAO(connection);
+		userDAO ud = new userDAO(connection);
+		
+		ArrayList<Requisicao> requisicoes = new ArrayList<Requisicao>();
+		ArrayList<Tag> tags = new ArrayList<Tag>();
+		try {
+			requisicoes = rd.buscarOfertasIDGuia(idGuia);
+			for(int i = 0; i < requisicoes.size();i++){
+				//Pega as tags daquela requisição e as seta para o objeto request
+				tags = td.selectRequestTagIdRequest(requisicoes.get(i).getIdRequest());
+				requisicoes.get(i).setTags(tags);
+				
+				String nomeCidade = ed.selectRetornaString("SELECT name FROM city WHERE id = " + requisicoes.get(i).getCidade().getIdCidade());
+				requisicoes.get(i).getCidade().setNome(nomeCidade);
+				
+				int idState = ed.selectRetornaChave("SELECT idState FROM city WHERE id = " + requisicoes.get(i).getCidade().getIdCidade());
+				String stateName = ed.selectRetornaString("SELECT name FROM state WHERE id = " + idState); 
+				Uf uf = new Uf(stateName,".",idState);
+				
+				int idCountry = ed.selectRetornaChave("SELECT idCountry FROM state WHERE id = " + idState);
+				String nameCountry = ed.selectRetornaString("SELECT name FROM country WHERE id = " + idCountry);
+				Pais pais = new Pais(nameCountry,".",idCountry);
+				uf.setPais(pais);
+				
+				requisicoes.get(i).getCidade().setUf(uf);
+				User user = ud.selectUserID(requisicoes.get(i).getIdTuser());
+				requisicoes.get(i).setUser(user);
+			}
+			//Deixo apenas as requisições que não tem o mesmo id
+			requisicoes = requisicoes.get(0).comparaIDReequisicoes(requisicoes); //tanto faz de qual requisição esse método vem
+			
+		} catch (SQLException e) {
+			System.out.println("Erro na consulta!");
+			e.printStackTrace();
+		}
+		return requisicoes;
+
 	}
 }
 

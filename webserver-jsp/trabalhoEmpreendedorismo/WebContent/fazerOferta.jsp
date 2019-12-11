@@ -74,7 +74,7 @@
 	   	  <div class = "form-group col-md-8 col-lg-8 col-xl-8" style = "text-align: center;">
 		        		<div class="card">
 					  		<div class="card-body">
-						    	<h5 class="card-title">${requisicao.title}</h5>
+						    	<h5 class="card-title" id = "campoValor">${requisicao.title}</h5>
 						    	<div class = "col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 						       		<p class="card-text">${requisicao.description}</p>
 						       	</div>
@@ -120,13 +120,13 @@
 							<div class="col-md-2 col-lg-2 col-xl-2"></div>
 							<div class="form-group col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
 								<label>Valor</label> 
-								<input  class="form-control" name="campoValor">
+								<input  class="form-control" name="campoValor" type = "number" required min = 1 max = "999">
 							</div>
 							<div class="col-md-2 col-lg-2 col-xl-2"></div>
 							<div class="form-group col-md-2 col-lg-2 col-xl-2"></div>
 							<div class="form-group col-12 col-sm-12 col-md-8 col-lg-8">
 								<label>Observacao</label> 
-								<textarea class="form-control" name="campoObservacao" style="padding-bottom: 50px;"></textarea>
+								<textarea class="form-control" name="campoObservacao" style="padding-bottom: 50px;" required minlength="4" maxlength="200" ></textarea>
 							</div>
 							<div class="form-group col-md-2 col-lg-2"></div>
 							<div class = "col-12 col-sm-12 col-md-12 col-lg-12" style = "text-align: center; margin-bottom: 10px;">

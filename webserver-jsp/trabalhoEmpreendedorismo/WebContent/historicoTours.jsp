@@ -3,6 +3,7 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <c:url value="/historicoServlet" var="linkHistoricoServlet"/>
 <c:url value="/ofertaServlet" var="linkOfertaServlet"/>
+<c:url value="/pagamentoServlet" var="linkPagametoServlet"/>
 
 
 <html lang="pt">
@@ -41,6 +42,11 @@
 		<%@ include file = "restoHeader.jsp" %>
       
       <div class="container">
+      <c:if test="${empty requisicoes}">
+      	<div class="alert alert-danger col-sm-12 col-md-12 col-lg-12 col-xl-12" role="alert" style = "text-align: center;">
+      		Nenhuma requisição de passeio foi feita!
+      	</div>
+      </c:if>
       <div class = "form-row">
       <!--<a style = "margin-left: 100px;"href="<c:url value='/ofertaServlet' />">Click here</a> -->	
       
@@ -55,10 +61,36 @@
 	      	</form>
       	</div>
       	<c:forEach items="${requisicoes}" var = "requisicao">
-      			
-		    	<div class = "form-group col-sm-12 col-md-6 col-lg-4" style = "text-align: center;">
+      		<c:choose>
+      		<c:when test = "${requisicao.isPago == 1}">
+      			<div class = "form-group col-sm-12 col-md-6 col-lg-4" style = "text-align: center;">
+		        	<form action ="${linkPagametoServlet}" method ="get">
+		        		<div class="card " style = "background-color: #98FB98;">
+					  		<div class="card-body">
+						    	<h5 class="card-title">${requisicao.title}</h5>
+						       	<p class="card-text">${requisicao.description}</p>
+						    	<a class="card-text">Data início: ${requisicao.startsAt}</a>
+						    	<div class = "form-group cold-md-2 col-lg-2"></div>
+						    	<a  style= "margin-top: 5px;" >Data fim: ${requisicao.endsAt}</a>
+						    	<div class = "col-md-12 col-lg-12" >
+							    	<c:forEach items = "${requisicao.tags}" var= "tag">
+							    		<label style = "color: blue;">#${tag.nome}</label>
+							    	</c:forEach>
+						    	</div>
+						    	<button class ="btn btn-primary" type = "submit">Ver</button>
+						    	<input type = "hidden" name = "Acao" value = "verTourEmProgresso">
+						    	<input name = "campoIdRequisicao" value="${requisicao.idRequest}" type = "hidden">
+						    	<!--<a href="/trabalhoEmpreendedorismo/fazerOferta.jsp">Ver</a>-->
+						    	<!-- <input name = "campoId">${requisicao.idRequest} -->
+					  		</div>
+						</div>    
+		        	</form>		
+		        </div>	
+      		</c:when>
+      		<c:otherwise>
+      		<div class = "form-group col-sm-12 col-md-6 col-lg-4" style = "text-align: center;">
 		        	<form action ="${linkOfertaServlet}" method ="get">
-		        		<div class="card" >
+		        		<div class="card " style = "background-color: #F0FFF0;">
 					  		<div class="card-body">
 						    	<h5 class="card-title">${requisicao.title}</h5>
 						       	<p class="card-text">${requisicao.description}</p>
@@ -79,6 +111,9 @@
 						</div>    
 		        	</form>		
 		        </div>
+      		</c:otherwise>
+      		</c:choose>
+		    	
 		 </c:forEach>
 	     </div>   
 	</div>

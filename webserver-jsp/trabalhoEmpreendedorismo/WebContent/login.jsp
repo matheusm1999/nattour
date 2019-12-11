@@ -248,7 +248,7 @@ if(el){
 								var image = "http://graph.facebook.com/" + response.id + "/picture?type=normal"
 								document.getElementById('campoFoto').value = image;
 								document.getElementById('status').innerHTML = "<img src= " + image + ">";
-								location.replace("https://66691ce5.ngrok.io/trabalhoEmpreendedorismo/loginServlet?Acao=loginFB&campoNome="+response.name+"&campoID=" + id + "&campoFoto=" + image+"&campoEmail=" + response.email);
+								location.replace("https://26e94682.ngrok.io/trabalhoEmpreendedorismo/loginServlet?Acao=loginFB&campoNome="+response.name+"&campoID=" + id + "&campoFoto=" + image+"&campoEmail=" + response.email);
 								//document.getElementById('status').innerHTML = response.authResponse.userID;
 								});	
 						//var nome = document.getElementById('campoSenha').value;

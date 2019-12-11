@@ -96,9 +96,15 @@
 	     		<form action ="${linkOfertaServlet}" method ="get">
 		        	    <div class="card">
 					  	    <div class="card-body">
+					  	    		<input type = "hidden" value = "${oferta.idOferta}" id ="campoIdOferta">
+					  	    		<input type = "hidden" value = "${oferta.idGUser}" id ="campoIdGUser">
+									<input type = "hidden" value = "${oferta.idRequest}" id ="idRequest">
+						  	    	<input type = "hidden" value = "${oferta.valor}" id ="campoDinheiro">
+						  	    	<input type = "hidden" value = "${usuarioLogado.userID}" id ="campoIdTUser">
 						  	    	<div class = "form-row">
 						  	    	<div class = "col-lg-12">
-							        	<h5 class="card-title" style="text-align: center;">R$ ${oferta.valor}</h5>
+							        	<h5 class="card-title" style="text-align: center;" >R$ ${oferta.valor}</h5>
+							       		<input type="hidden" id = "campoValor" value = "${oferta.valor}">
 							       	</div>
 							       	<div class = "col-md-12 col-lg-12" style="margin-bottom: 10px; ">
 							       		<a class="card-text"  style="text-align:left; font-weight: bold;">Obs:</a>
@@ -118,15 +124,17 @@
 									    	</div>	
 							    		</div>
 							    	</div>
-							    	<div class = "col-6 col-sm-6 col-md-6 col-lg-6" style = "text-align: right;">
-							    		<button class ="btn btn-primary" type = "submit" style = "margin-top: 10px;">Aceitar</button>
-							    		<div id="paypal-button-container"></div>
-							    	</div>
-							    	<div class = "col-6 col-sm-6 col-md-6 col-lg-6" style = "text-align: left;">
-							    		<button class ="btn btn-danger" type = "submit" style = "margin-top: 10px;">Recusar</button>
-							    	</div>
-							    	<input type = "hidden" name = "Acao" value = "verOferta">
-							    	<input name = "campoId" value="${oferta.idOferta}" type = "hidden">
+							    	<c:if test="${usuarioLogado.isTourist == 1}">
+								    	<div class = "col-6 col-sm-6 col-md-6 col-lg-6" style = "text-align: right;">
+								    		<!-- <button class ="btn btn-primary" type = "submit" style = "margin-top: 10px;">Aceitar</button> -->
+								    		<div id="paypal-button-container" style = "margin-top: 10px;"></div>
+								    	</div>
+								    	<div class = "col-6 col-sm-6 col-md-6 col-lg-6" style = "text-align: left;">
+								    		<button class ="btn btn-danger" type = "submit" style = "margin-top: 10px;">Recusar</button>
+								    	</div>
+								    	<input type = "hidden" name = "Acao" value = "verOferta">
+								    	<input name = "campoId" value="${oferta.idOferta}" type = "hidden">
+					  				</c:if>
 					  			</div>
 					  		</div>
 						</div>
@@ -143,18 +151,19 @@
 
   <!-- Bootstrap core JavaScript -->
    <script>
+   var valor = document.getElementById('campoValor').value;
+   //document.getElementById('campoValor').innerHTML = 'connected';
+   console.log("VALLLLLLLLOORRR" + valor);
+   //var preco = valor.toString();
   paypal.Buttons({
     createOrder: function(data, actions) {
       // This function sets up the details of the transaction, including the amount and line item details.
+      
       return actions.order.create({
         purchase_units: [{
           amount: {
-            value: '10.00',
-            currency: 'USD'    
+            value: valor  	  
           },
-          payee: {
-              email_address: 'payee@gmail.com'
-          }
         }]
       });
     },
@@ -163,7 +172,13 @@
       return actions.order.capture().then(function(details) {
         // This function shows a transaction success message to your buyer.
         alert('Transaction completed by ' + details.payer.name.given_name);
-      });
+        var idOferta = document.getElementById('campoIdOferta').value;
+        var idGUser = document.getElementById('campoIdGUser').value;
+        var idTUser = document.getElementById('campoIdTUser').value;
+        var idRequest = document.getElementById('idRequest').value;
+        var dinheiro = document.getElementById('campoDinheiro').value;
+        location.replace("https://26e94682.ngrok.io/trabalhoEmpreendedorismo/pagamentoServlet?Acao=pagamentoConcluido&campoIdOferta="+idOferta+"&campoIdGUser=" + idGUser + "&campoIdTUser=" + idTUser + "&campoIdRequest=" + idRequest + "&idValor	=" + dinheiro);
+        });
     }
   }).render('#paypal-button-container');
   //This function displays Smart Payment Buttons on your web page.

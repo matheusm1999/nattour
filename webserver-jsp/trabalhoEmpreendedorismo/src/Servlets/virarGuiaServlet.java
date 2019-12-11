@@ -39,18 +39,20 @@ public class virarGuiaServlet extends HttpServlet {
 			int ddd = Integer.parseInt(request.getParameter("campoDDD"));
 			int ddi = Integer.parseInt(request.getParameter("campoDDI"));
 			int numeroTelefone = Integer.parseInt(request.getParameter("campoNumeroTelefone"));
+			String emailPaypal = request.getParameter("campoEmailPaypal");
 			
 			User user = (User) request.getSession(false).getAttribute("usuarioLogado");
 			user.setDdd(ddd);
 			user.setDdi(ddi);
 			user.setNumeroTelefone(numeroTelefone);
+			user.setEmailPaypal(emailPaypal);
 			
 			guiaServicos gs = new guiaServicos();
 			gs.virarGuia(user);
 			
 			HttpSession sessao = request.getSession(false);
 			//sessao.setAttribute("usuarioLogado", user);
-			RequestDispatcher rd = request.getRequestDispatcher("Guia/selecionarRequisicao.jsp"); //para qual jsp vou enviar meu request	
+			RequestDispatcher rd = request.getRequestDispatcher("selecionarRequisicao.jsp"); //para qual jsp vou enviar meu request	
 			sessao.setAttribute("usuarioLogado", user);
 	    	rd.forward(request, response);  //encaminho para o jsp
 		}

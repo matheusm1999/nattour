@@ -17,7 +17,8 @@ public class User {
 	private int numeroTelefone;
 	private int isGuide;
 	private int isTourist;
-	
+	private String emailPaypal;
+	private String linkWhats;
 
 	public User(){
 		
@@ -171,6 +172,30 @@ public class User {
 		return "name: " + this.name +
 				"\nemail: " + this.email +
 				"\nid: " + this.userID;
+	}
+
+	public String getEmailPaypal() {
+		return emailPaypal;
+	}
+
+	public void setEmailPaypal(String emailPaypal) {
+		this.emailPaypal = emailPaypal;
+	}
+
+	public String getLinkWhats() {
+		return linkWhats;
+	}
+
+	public void setLinkWhats() {
+		Validar valida = new Validar();
+		//String ddi = String.valueOf(this.ddi);
+		//String ddd = String.valueOf(this.ddd);
+		//String numeroTelefone = String.valueOf(this.numeroTelefone);
+		System.out.println(ddi);
+		System.out.println(ddd);
+		System.out.println(numeroTelefone);
+		this.linkWhats = valida.Whatsapp(ddi, ddd, numeroTelefone);
+		System.out.println("O link é: " + this.linkWhats);
 	}
 		
 }

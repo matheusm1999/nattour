@@ -16,7 +16,7 @@ public class userDAO {
 	
 	private String SQLInsertUser = "INSERT INTO USER (email,name,hash,salt,idTRating,idGRating,idCity,isGuide,isTourist,docValue,docType,idFacebook,fotoFacebook,ddi,ddd,numeroTelefone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private String SQLSelectUserIDFacebook = "SELECT * FROM user where idFacebook = ?";
-	private String SQLUpdateUserIsGuia = "UPDATE user SET isGuide = 1,isTourist = 0 ,ddd = ?, ddi = ?, numeroTelefone = ? WHERE id = ?";
+	private String SQLUpdateUserIsGuia = "UPDATE user SET isGuide = 1,isTourist = 0 ,ddi = ?, ddd = ?, numeroTelefone = ? , emailPaypal = ? WHERE id = ?";
 	private String SQLSelectUserID = "SELECT * FROM user WHERE id = ?";
 	private Connection connection;
 	
@@ -89,12 +89,26 @@ public class userDAO {
 			String fotoFacebook = rs.getString("fotoFacebook");
 			int isGuide = rs.getInt("isGuide");
 			int isTourist = rs.getInt("isTourist");
+			String emailPaypal = "";
+			int ddi = 0;
+			int ddd = 0;
+			int numeroTelefone = 0;
+			if(isGuide == 1){
+				emailPaypal = rs.getString("emailPaypal");
+				ddi = rs.getInt("ddi");
+				ddd = rs.getInt("ddd");
+				numeroTelefone = rs.getInt("numeroTelefone");
+			}
 			
 			//Criando os os objetos
 			Cidade cidade = new Cidade(idCity);
 			user = new User(id,idFacebook,fotoFacebook,cidade,name);
 			user.setIsGuide(isGuide);
 			user.setIsTourist(isTourist);
+			user.setEmailPaypal(emailPaypal);
+			user.setDdi(ddi);
+			user.setDdd(ddd);
+			user.setNumeroTelefone(numeroTelefone);
 		}
 		return user;
 	}
@@ -111,10 +125,13 @@ public class userDAO {
 	    int ddi = user.getDdi();
 	    int ddd = user.getDdd();
 	    int numeroTelefone = user.getNumeroTelefone();
-		ps.setInt(1, ddi); //mudar o TRating depois para outro valor, atualmente é 0
+	    String emailPaypal = user.getEmailPaypal();
+	    
+		ps.setInt(1, ddi); 
 		ps.setInt(2, ddd);
-		ps.setInt(3, numeroTelefone); //Atualmente é 0, mas preciso alterar depois (idCity).
-		ps.setInt(4,id);
+		ps.setInt(3, numeroTelefone); 
+		ps.setString(4, emailPaypal);
+		ps.setInt(5,id);
 		
 		ps.execute();
 	}
@@ -140,11 +157,30 @@ public class userDAO {
 		int isTourist = rs.getInt("isTourist");
 		String email = rs.getString("email");
 		
+		String emailPaypal = "";
+		int ddi = 0;
+		int ddd = 0;
+		int numeroTelefone = 0;
+		if(isGuide == 1){
+			System.out.println("É um guia, pegando infos adicionais");
+			emailPaypal = rs.getString("emailPaypal");
+			ddi = rs.getInt("ddi");
+			ddd = rs.getInt("ddd");
+			numeroTelefone = rs.getInt("numeroTelefone");
+			System.out.println(ddi);
+			System.out.println(ddd);
+			System.out.println(numeroTelefone);
+		}
+		
 		//Criando os os objetos
 		Cidade cidade = new Cidade(idCity);
 		user = new User(id,idFacebook,fotoFacebook,cidade,name,email);
 		user.setIsGuide(isGuide);
 		user.setIsTourist(isTourist);
+		user.setEmailPaypal(emailPaypal);
+		user.setDdi(ddi);
+		user.setDdd(ddd);
+		user.setNumeroTelefone(numeroTelefone);
 		
 		//System.out.println(user);
 		return user;

@@ -17,11 +17,35 @@ public class Requisicao {
 	private ArrayList<Tag> tags;
 	private User user;
 	private String horarioInicio;
+	private int isPago;
 	
 	private String horarioFim;
 
 	public Requisicao(){
 		
+	}
+	
+	//Deixa apenas as requisições iguais
+	//Saída: Requisições que não tem o id repetido
+	public ArrayList<Requisicao> comparaIDReequisicoes(ArrayList<Requisicao> requisicoes){
+		ArrayList<Requisicao> novasRequisicoes = new ArrayList<>();
+		novasRequisicoes.add(requisicoes.get(0));
+		int igual = 0; //0 se for igual
+		
+		for(int i = 1;i < requisicoes.size();i++){
+			//Pego o id de uma requisição
+			int idRequisicao = requisicoes.get(i).getIdRequest();
+			
+			//Comparo esse id com todos os outros na lista de novasRequisicoes
+			for(int j = 0; j < novasRequisicoes.size(); j++){
+				if(idRequisicao == novasRequisicoes.get(j).getIdRequest())
+					igual++;
+			}
+			if(igual == 0) //se não tiverem ids iguais...
+				novasRequisicoes.add(requisicoes.get(i));
+		igual = 0;
+		}
+		return novasRequisicoes;
 	}
 	
 	public Requisicao(String title, String description, String startsAt, String endsAt, float minPrice, float maxPrice,int idTuser, int idCity, String complement,Cidade cidade) {
@@ -200,6 +224,14 @@ public class Requisicao {
 				"\nidTuser: " + this.idTuser +
 				"\nidCity" + this.idCity + 
 				"\nComplement" + this.complement;
+	}
+
+	public int getIsPago() {
+		return isPago;
+	}
+
+	public void setIsPago(int isPago) {
+		this.isPago = isPago;
 	}
 
 }

@@ -13,10 +13,17 @@ public class ofertaDAO {
 	String SQLInsereOferta = "INSERT INTO offer (description,price,idGUser,idRequest) VALUES (?,?,?,?)";
 	String SQLSelectOfertaIdRequest = "SELECT * FROM offer WHERE idRequest = ?";
 	String SQLSelectOfertaId = "SELECT * FROM offer WHERE id = ?";
+	String SQLUpdateIsPagoOffer = "UPDATE offer SET isPago = 1 where id = ?";
 	
 	public ofertaDAO(Connection connection){
 		this.connection = connection;
 	}
+	
+		public void updateOfertaIsPago(int idOferta) throws SQLException{
+			PreparedStatement ps = connection.prepareStatement(SQLUpdateIsPagoOffer);
+			ps.setInt(1, idOferta);
+			ps.execute();
+		}
 	
 		//Retorna a chave primária por meio da consulta especificada nos parâmetros
 		//Pré condição: A consulta tem que ser um SELECT e precisa ser do tipo que retorna uma chave primária

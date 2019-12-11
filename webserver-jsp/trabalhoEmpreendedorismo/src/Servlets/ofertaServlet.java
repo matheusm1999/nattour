@@ -45,7 +45,7 @@ public class ofertaServlet extends HttpServlet {
 		User user = (User) sessao.getAttribute("usuarioLogado");
 		
 		if(paramAcao.equals("buscarRequisicoes")){
-			System.out.println("Buscando requisiçoes");
+			System.out.println("Buscando requisiçoes...");
 			//ofertaServicos os = new ofertaServicos();
 			RequisicaoServicos rs = new RequisicaoServicos();
 			
@@ -67,7 +67,7 @@ public class ofertaServlet extends HttpServlet {
 			
 			int id = Integer.parseInt(request.getParameter("campoId"));
 			requisicao = rs.recuprerRequisicaoId(id);
-			System.out.println("Oferta será feita para: " + id);
+			System.out.println("Oferta será feita para: " 	+ id);
 			//System.out.println("NOME DO USUARIO: " + requisicao.getUser().getName());
 			RequestDispatcher rd = request.getRequestDispatcher("fazerOferta.jsp"); //para qual jsp vou enviar meu request
 			request.setAttribute("requisicao", requisicao); //coloco o atributo (nome da empresa) na requisição

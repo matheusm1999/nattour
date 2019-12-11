@@ -39,6 +39,17 @@
 	    <div id="page-content-wrapper">
 	<%@ include file = "restoHeader.jsp" %>
       <div class="container-fluid">
+      <c:if test="${resultado == 0}">
+      	<div class="alert alert-danger col-sm-12 col-md-12 col-lg-12 col-xl-12" role="alert">
+			 Um erro no formulário ocorreu por um ou mais desses motivos:
+			 <ul>
+				 <li>Data de Início e Fim não estão no mesmo dia, mês e ano</li>
+				 <li>Data de Início ou Fim são maiores ou menores que o dia atual</li>
+				 <li>Horário de Início e ou Fim são menores que o horário atual </li>
+				 <li>Passeio tem mais de 4 horas de duração</li>
+			</ul>
+		</div>
+      </c:if>
         <form action ="${linkPasseioServlet}" method ="get">
         	<div class = "form-row">
 	        	<div class ="col-md-12 col-lg-12" style = "text-align: center">  
@@ -47,33 +58,33 @@
 	        	<div class = "col-md-2 col-lg-2"></div>
 	        	<div class = "col-md-8 col-lg-8">
 	        		<label style = "margin-top:15px;">Título do Passeio</label> 
-	        		<input class ="form-control" name ="campoTitulo" placeholder="Ex: Passeio nas Cataratas">
+	        		<input class ="form-control" name ="campoTitulo" placeholder="Ex: Passeio nas Cataratas" required minlength="6" maxlength="40" type = "text">
 	        	</div>
 	        <div class = "col-md-2 col-lg-2"> </div>
 	        <div class = "col-md-2 col-lg-2"> </div>
 	        <div class = "col-md-8 col-lg-8">
 	        		<label style = "margin-top: 15px;">Descrição</label> 
-	        	    <textarea class ="form-control" style="padding-bottom: 50px;" name ="campoDescricao"></textarea>
+	        	    <textarea class ="form-control" style="padding-bottom: 50px;" name ="campoDescricao" required  minlength="6" maxlength="200" required></textarea>
 	        </div>
 	        <div class = "col-md-2 col-lg-2"> </div>
 	        <div class = "col-md-2 col-lg-2"> </div>
 	        <div class = "col-sm-6 col-md-4 col-lg-4" style="margin-top: 15px;"> 
 	        		<label>Data Início</label>
-	        	    <input class ="form-control" name ="campoDataInicio" type="date" style = "padding-right: 15px;" >
+	        	    <input class ="form-control" name ="campoDataInicio" type="date" style = "padding-right: 15px;" required>
 	        </div>
 	        <div class = "col-sm-6 col-md-4 col-lg-4" style="margin-top: 15px;">
 	        	<label>Data Fim</label> 
-	        	<input class ="form-control" name ="campoDataFim" type="date" style = "padding-right: 15px;">
+	        	<input class ="form-control" name ="campoDataFim" type="date" style = "padding-right: 15px;" required>
 	        </div>
 	        <div class = " col-md-2 col-lg-2"></div> 
 	        <div class = " col-md-2 col-lg-2"></div>
 	        <div class = "col-sm-6 col-md-4 col-lg-4" style="margin-top: 15px;"> 
 	        		<label>Horário Início</label>
-	        	    <input input type = "time" class ="form-control" name ="campoHorarioInicio" type="date" style = "padding-right: 15px;" >
+	        	    <input input type = "time" class ="form-control" name ="campoHorarioInicio" type="date" style = "padding-right: 15px;" required>
 	        </div>
 	        <div class = "col-sm-6 col-md-4 col-lg-4" style="margin-top: 15px;">
 	        	<label>Horário Fim</label> 
-	        	<input type = "time" class ="form-control" name ="campoHorarioFim" type="date" style = "padding-right: 15px;">
+	        	<input type = "time" class ="form-control" name ="campoHorarioFim" type="date" style = "padding-right: 15px;" required>
 	        </div>
 	        <div class = "col-md-2 col-lg-2"> </div>
 	        <div class = "col-md-2 col-lg-2"> </div> 
@@ -105,7 +116,7 @@
 	        <div class = "col-md-2 col-lg-2"></div>
 	         <div class = "col-sm-12 col-md-8 col-lg-8" style="margin-top: 15px;">
 	        	    <label>Local de Encontro</label> 
-	        	    <input class ="form-control" name ="campoComplemento" >
+	        	    <input class ="form-control" name ="campoComplemento" placeholder = "Ex: Rua A, Hotel XYZ" required>
 	        </div>
 	        <div class = "col-md-2 col-lg-2"></div>
 	        <input type = "hidden" value = "${user.userID}" name = "idTuser">

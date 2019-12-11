@@ -41,42 +41,35 @@
 	<%@ include file = "restoHeader.jsp" %>
 	
       <div class="container-fluid">
-      <div class = "row">
+      
       <!--<a style = "margin-left: 100px;"href="<c:url value='/ofertaServlet' />">Click here</a> -->	
-      <div class = "form-group col-md-5 col-xs-5 col-sm-5"></div>
-      <h2 class="h2"style = "margin-bottom: 5%;">Tornar-se um guia</h2>
-      <div class = "col-md-5 col-xs-5 col-sm-5"></div>
-      <!-- Fim do titulo -->
+      <div class = "form-group col-md-12 col-xs-12 col-sm-12 col-lg-12" style = "text-align: center;">
+      	<h2 class="h2"style = "margin-bottom: 5%;">Tornar-se um guia</h2>
+      </div>
       <form action="${linkVirarGuiaServlet}" method = get>
-      <div class = "col-sm-1 col-md-7 col-xs-1">
+      <div class = "form-row">
+      <div class = "col-12 col-sm-12 col-md-6 col-lg-6 col-xs-6">
 		  <label >DDI</label>
+		  <input style = "margin-bottom: 10px;" class = "form-control" name = "campoDDI"  type="number" required  min = "0" max = "99">
       </div>
-      <div class = "col-md-7">
-      	  <input style = "margin-bottom: 10%;" class = "form-control" name = "campoDDI"  type="number" >	
-      </div>
-      <div class = "col-md-5 col-xs-5 col-sm-5"></div>
-      <div class = "col-md-6 col-xs-1">
+      <div class = "col-12 col-sm-12 col-md-6 col-lg-6 col-xs-6">
 		  <label>DDD</label>
+		  <input style = "margin-bottom: 10px;" class = "form-control" name = "campoDDD"  type="number" required min = "0" max = "99" >	      	
       </div>
-      <div class = "form-group col-md-7 col-xs-2">
-      	  <input class = "form-control" name = "campoDDD"  type="number" >
+      <div class = "col-sm-12 col-12 col-md-6 col-lg-6 col-xs-6">
+		  <label>Número de celular</label>
+      	  <input style = "margin-bottom: 10px;" class = "form-control" name = "campoNumeroTelefone"  type="number" required min = "0" max = "999999999" placeholder = "(Apenas Números)">
       </div>
-      <div class = "col-md-1 col-xs-1"></div>
-      <div class = "form-group col-md-4"></div>
-      <div class = "col-sm-1 col-md-7 col-xs-1">
-		  <label  >Número de celular</label>
+      <div class = "col-12 col-sm-12 col-md-6 col-lg-6 col-xs-6">
+		  <label>Email do Paypal</label>
+      	  <input class = "form-control" name = "campoEmailPaypal" type = "email" required minlength="6" maxlength = "35">
       </div>
-      <div class = "col-md-7">
-      	  <input class = "form-control" name = "campoNumeroTelefone"  type="number" >	
+      <div class = "col-md-12 col-xs-12 col-sm-12 col-lg-12" style = "text-align: center;">
+	      <button type = "submit" class ="btn btn-primary" style=" margin-top: 10px;">Virar Guia</button>
+	      <input type = "hidden" name = "Acao" value ="VirarGuia">
+      </div>	
       </div>
-      <div class = "form-group col-md-4"></div>
-      <div class = "col-sm-4 col-md-6"></div>	 
-	      		<button type = "submit" class ="btn btn-primary" style=" margin-left: 15px; margin-top: 10%;">Virar Guia</button>
-	      		<input type = "hidden" name = "Acao" value ="VirarGuia">
-	      	</form>
-      	
-      	  
-	</div>
+      </form>	  
 	</div>
 	</div>
 	</div>

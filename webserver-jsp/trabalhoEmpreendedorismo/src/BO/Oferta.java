@@ -7,7 +7,11 @@ public class Oferta {
 	private int idGUser;
 	private int idRequest;
 	private User user;
-
+	private int isPago;
+	
+	public Oferta(){
+		
+	}
 	
 	public Oferta(float valor,String description,int idRequest){
 		this.valor = valor;
@@ -78,6 +82,14 @@ public class Oferta {
 				"\nidGUser: " + this.idGUser+ 
 				"\nidRequest: " + this.idRequest +  
 				"\n" + this.user.toString();
+	}
+
+	public int getIsPago() {
+		return isPago;
+	}
+
+	public void setIsPago(int isPago) {
+		this.isPago = isPago;
 	}
 	
 }
