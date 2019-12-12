@@ -18,11 +18,19 @@ public class requestDAO {
 	//private String SQLSelectOfferIdGuiaa = "SELECT * FROM offer WHERE idGUser = ?";
 	private String SQLInsertTagRequest = "INSERT INTO requesttag (idRequest,idTag) VALUES (?,?)";
 	String SQLUpdateIsPagoRequest  ="UPDATE request SET isPago = 1 where id = ?";
+	String SQLUpdateIsTerminadoRequest  ="UPDATE request SET isTerminado = 1 where id = ?";
+
 	
 	private Connection connection;
 	
 	public requestDAO(Connection connection){
 		this.connection = connection;
+	}
+	
+	public void updateRequisicaoIsTerminado(int idRequisicao) throws SQLException{
+		PreparedStatement ps = connection.prepareStatement(SQLUpdateIsTerminadoRequest);
+		ps.setInt(1, idRequisicao);
+		ps.execute();
 	}
 	
 	public void updateRequisicaoIsPago(int idRequisicao) throws SQLException{

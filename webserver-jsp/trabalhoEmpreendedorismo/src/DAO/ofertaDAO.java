@@ -14,9 +14,17 @@ public class ofertaDAO {
 	String SQLSelectOfertaIdRequest = "SELECT * FROM offer WHERE idRequest = ?";
 	String SQLSelectOfertaId = "SELECT * FROM offer WHERE id = ?";
 	String SQLUpdateIsPagoOffer = "UPDATE offer SET isPago = 1 where id = ?";
+	String SQLUpdateIsTerminadoRequest  ="UPDATE offer SET isTerminado = 1 where id = ?";
+
 	
 	public ofertaDAO(Connection connection){
 		this.connection = connection;
+	}
+	
+	public void updateOfertaIsTerminado(int idRequisicao) throws SQLException{
+		PreparedStatement ps = connection.prepareStatement(SQLUpdateIsTerminadoRequest);
+		ps.setInt(1, idRequisicao);
+		ps.execute();
 	}
 	
 		public void updateOfertaIsPago(int idOferta) throws SQLException{

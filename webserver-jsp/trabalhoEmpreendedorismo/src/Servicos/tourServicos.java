@@ -29,7 +29,7 @@ public class tourServicos {
 			if(isGuide == 1)
 				tour = td.selectTourIDGuia(idUsuario);
 			else
-				tour = td.selectTourID(idUsuario);
+				tour = td.selectTourID(6);
 				System.out.println("KBO MESMO: " + tour.getIsTerminado());
 			Requisicao requisicao = rs.recuprerRequisicaoId(tour.getRequisicao().getIdRequest());
 			Oferta oferta = os.buscarOfertaID(tour.getOferta().getIdOferta());
@@ -72,8 +72,7 @@ public class tourServicos {
 	public void finalizaTour(int idUsuario,int isGuide){
 		Connection connection = Conexao.getConnection();
 		tourEmProgressoDAO td = new tourEmProgressoDAO(connection);
-		requestDAO rd = new requestDAO(connection);
-		ofertaDAO od = new ofertaDAO(connection);
+		
 		
 		System.out.println("finalizando o tour");
 		tourEmProgresso tour = buscaTourID(idUsuario,isGuide);
@@ -86,7 +85,10 @@ public class tourServicos {
 						System.out.println("é um turista!!");
 						td.updateTourIsTerminadoTurista(idUsuario);
 					}
-					rd.updateRequisicaoIsTerminado(tour.getRequisicao().getIdRequest());
+				requestDAO rd = new requestDAO(connection);
+				ofertaDAO od = new ofertaDAO(connection);
+				
+				rd.updateRequisicaoIsTerminado(tour.getRequisicao().getIdRequest());
 				od.updateOfertaIsTerminado(tour.getOferta().getIdOferta());
 			} catch (SQLException e) {
 				System.out.println("erro ao finalizar o tour!");

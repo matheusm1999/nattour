@@ -158,7 +158,7 @@ function statusChangeCallback(response){
 	//Se a pessoa logar
 	if(response.status === 'connected'){
 		console.log("conectado");
-		document.getElementById('status').innerHTML = 'connected';
+		//document.getElementById('status').innerHTML = 'connected';
 		document.getElementById('campoLogin').setAttribute('value',response.authResponse.userID);
 		//document.getElementById('campoEmail').setAttribute('value',response.authResponse.email);
 				
@@ -168,7 +168,7 @@ function statusChangeCallback(response){
 		
 		FB.api('/me',{fields: 'id,email,name,picture'},function(response){
 				console.log('Login com sucesso para: ' + response.name);
-				document.getElementById('status').innerHTML = 'Obrigrado por logar, ' + response.name + '!';
+				//document.getElementById('status').innerHTML = 'Obrigrado por logar, ' + response.name + '!';
 				document.getElementById('campoSenha').value = response.name;
 				var email = document.getElementById('campoEmail').value;
 				var id = document.getElementById('campoLogin').value;
@@ -227,13 +227,13 @@ if(el){
 						
 						FB.api('/me',{fields: 'id,email,name,picture'},function(response){
 								console.log('Login com sucesso para: ' + response.name);
-								document.getElementById('status').innerHTML = 'Obrigrado por logar, ' + response.name + '!';
+								//document.getElementById('status').innerHTML = 'Obrigrado por logar, ' + response.name + '!';
 								document.getElementById('campoSenha').value = response.name;
 								var email = document.getElementById('campoEmail').value;
 								var id = document.getElementById('campoLogin').value;
 								var image = "http://graph.facebook.com/" + response.id + "/picture?type=normal"
 								document.getElementById('campoFoto').value = image;
-								document.getElementById('status').innerHTML = "<img src= " + image + ">";
+								//document.getElementById('status').innerHTML = "<img src= " + image + ">";
 								location.replace("https://26e94682.ngrok.io/trabalhoEmpreendedorismo/loginServlet?Acao=loginFB&campoNome="+response.name+"&campoID=" + id + "&campoFoto=" + image+"&campoEmail=" + response.email);
 								//document.getElementById('status').innerHTML = response.authResponse.userID;
 								});	

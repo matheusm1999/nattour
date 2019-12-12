@@ -125,13 +125,11 @@
 							    		</div>
 							    	</div>
 							    	<c:if test="${usuarioLogado.isTourist == 1}">
-								    	<div class = "col-6 col-sm-6 col-md-6 col-lg-6" style = "text-align: right;">
+								    	<div class = "col-12 col-sm-12 col-md-12 col-lg-12" style = "text-align: center;">
 								    		<!-- <button class ="btn btn-primary" type = "submit" style = "margin-top: 10px;">Aceitar</button> -->
 								    		<div id="paypal-button-container" style = "margin-top: 10px;"></div>
 								    	</div>
-								    	<div class = "col-6 col-sm-6 col-md-6 col-lg-6" style = "text-align: left;">
-								    		<button class ="btn btn-danger" type = "submit" style = "margin-top: 10px;">Recusar</button>
-								    	</div>
+
 								    	<input type = "hidden" name = "Acao" value = "verOferta">
 								    	<input name = "campoId" value="${oferta.idOferta}" type = "hidden">
 					  				</c:if>
